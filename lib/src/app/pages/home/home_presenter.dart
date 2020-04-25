@@ -1,4 +1,6 @@
+import '../../../domain/usecases/get_all_moves_usecase.dart';
 import '../../../domain/usecases/get_user_usecase.dart';
+
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 class HomePresenter extends Presenter {
@@ -6,8 +8,11 @@ class HomePresenter extends Presenter {
   Function getUserOnComplete;
   Function getUserOnError;
 
+  Function getAllMovesOnNext;
+
   final GetUserUseCase getUserUseCase;
-  HomePresenter(usersRepo) : getUserUseCase = GetUserUseCase(usersRepo);
+  final GetAllMovesUseCase getAllMovesUseCase;
+  HomePresenter(usersRepo, movesRepo) : getUserUseCase = GetUserUseCase(usersRepo), getAllMovesUseCase = GetAllMovesUseCase(movesRepo);
 
   void getUser(String uid) {
     // execute getUseruserCase
@@ -15,9 +20,30 @@ class HomePresenter extends Presenter {
         _GetUserUseCaseObserver(this), GetUserUseCaseParams(uid));
   }
 
+  void getAllMoves() {
+    getAllMovesUseCase.execute(
+        _GetAllMovesUseCaseObserver(this),
+        GetAllMovesUseCaseParams());
+  }
+
   @override
   void dispose() {
     getUserUseCase.dispose();
+    getAllMovesUseCase.dispose();
+  }
+}
+
+class _GetAllMovesUseCaseObserver extends Observer<GetAllMovesUseCaseResponse> {
+  final HomePresenter presenter;
+  _GetAllMovesUseCaseObserver(this.presenter);
+  @override
+  void onComplete() {}
+  @override
+  void onError(e) {}
+  @override
+  void onNext(response) {
+    assert(presenter.getUserOnNext != null);
+    presenter.getAllMovesOnNext(response.moves);
   }
 }
 
