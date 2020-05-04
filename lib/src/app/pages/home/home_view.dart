@@ -1,4 +1,3 @@
-import 'package:charts_flutter/flutter.dart';
 import 'package:salsa_memo/src/app/CustomImages.dart';
 import 'package:salsa_memo/src/app/widgets/simple_bar_chart.dart';
 import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
@@ -9,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import '../../../data/repositories/data_users_repository.dart';
-
-import 'package:flutter/src/painting/text_style.dart' as ui;
 
 class HomePage extends View {
   HomePage({Key key, this.title}) : super(key: key);
@@ -96,20 +93,24 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
     return table;
   }
 
+  Widget _achievementsCell(String text) {
+    return Row(children: <Widget> [new Image.asset(CustomImages.logo, width: 50,), Text(text)]);
+  }
+
   Widget _statsTab() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
       child: Column(children: <Widget>[
-        Text("Progress", style: ui.TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
+        Text("Progress", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
         SizedBox(height: 10,),
         Container(child: SimpleBarChart.withSampleData(), height: MediaQuery.of(context).size.height / 3,),
         SizedBox(height: 50,),
-        Text("Achievements", style: ui.TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
+        Text("Achievements", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
         SizedBox(height: 10,),
         Column(children: <Widget>[
-          Row(children: <Widget> [new Image.asset(CustomImages.logo, width: 50,), Text("Perform a first dance")]),
-          Text("Perform 3 consecutive days"),
-          Text("Perform 5 consecutive days"),
+          _achievementsCell("Perform a first dance"),
+          _achievementsCell("Perform 3 consecutive days"),
+          _achievementsCell("Perform 5 consecutive days"),
         ],)
       ],),
     );
@@ -130,7 +131,7 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
               ),
               new Container(
                   padding: const EdgeInsets.all(10.0),
-                  color: Colors.blue,child: new Text("3",style: new ui.TextStyle(color: Colors.white),)),
+                  color: Colors.blue,child: new Text("3",style: new TextStyle(color: Colors.white),)),
             ],
           ),
         ),
