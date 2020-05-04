@@ -93,8 +93,13 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
     return table;
   }
 
-  Widget _achievementsCell(String text) {
-    return Row(children: <Widget> [new Image.asset(CustomImages.logo, width: 50,), Text(text)]);
+  Widget _achievementsCell(String text, bool isComplete) {
+    return Row(children: <Widget> [
+      new Image.asset(CustomImages.logo, width: 50,),
+      Text(text),
+      Spacer(flex: 1,),
+      new Image.asset(isComplete ? CustomImages.starOn : CustomImages.starOff, width: 50,),
+    ]);
   }
 
   Widget _statsTab() {
@@ -108,9 +113,15 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
         Text("Achievements", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
         SizedBox(height: 10,),
         Column(children: <Widget>[
-          _achievementsCell("Perform a first dance"),
-          _achievementsCell("Perform 3 consecutive days"),
-          _achievementsCell("Perform 5 consecutive days"),
+          _achievementsCell("Perform a first dance", true),
+          _achievementsCell("Perform 3 consecutive days", false),
+          _achievementsCell("Perform 5 consecutive days", true),
+          _achievementsCell("Perform 5 consecutive days", true),
+          _achievementsCell("Perform 5 consecutive days", true),
+          _achievementsCell("Perform 5 consecutive days", true),
+          _achievementsCell("Perform 5 consecutive days", true),
+          _achievementsCell("Perform 5 consecutive days", true),
+          _achievementsCell("Perform 5 consecutive days", true),
         ],)
       ],),
     );

@@ -29,19 +29,19 @@ class SimpleBarChart extends StatelessWidget {
   /// Create one series with sample hard coded data.
   static List<charts.Series<OrdinalPerformances, String>> _createSampleData() {
     final data = [
-      new OrdinalPerformances('Mon', 0),
-      new OrdinalPerformances('Tue', 0),
+      new OrdinalPerformances('Mon', 2),
+      new OrdinalPerformances('Tue', 1),
       new OrdinalPerformances('Wed', 0),
-      new OrdinalPerformances('Thu', 0),
-      new OrdinalPerformances('Fri', 0),
+      new OrdinalPerformances('Thu', 1),
+      new OrdinalPerformances('Fri', 2),
       new OrdinalPerformances('Sat', 0),
-      new OrdinalPerformances('Sun', 0),
+      new OrdinalPerformances('Sun', 3),
     ];
 
     return [
       new charts.Series<OrdinalPerformances, String>(
         id: 'Progress',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(Colors.orange),
         domainFn: (OrdinalPerformances performances, _) => performances.day,
         measureFn: (OrdinalPerformances performances, _) => performances.performanceCount,
         data: data,
