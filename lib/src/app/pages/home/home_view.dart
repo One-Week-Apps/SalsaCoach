@@ -20,21 +20,23 @@ class HomePage extends View {
       _HomePageState();
 }
 
-class _HomePageState extends ViewState<HomePage, HomeController> with SingleTickerProviderStateMixin {
-  _HomePageState() : super(HomeController(DataUsersRepository(), DataMovesRepository()));
+class _HomePageState extends ViewState<HomePage, HomeController>
+    with SingleTickerProviderStateMixin {
+  _HomePageState()
+      : super(HomeController(DataUsersRepository(), DataMovesRepository()));
 
   var _tabs = [
     new Tab(text: 'Perform', icon: new Icon(Icons.music_note)),
     new Tab(text: 'Stats', icon: new Icon(Icons.insert_chart)),
-    new Tab(text: 'Settings', icon: new Icon(Icons.settings)),
+    new Tab(text: 'Moves', icon: new Icon(Icons.library_books)),
   ];
-  
+
   var _selectedTabIndex = 0;
 
   Widget _appBar() {
     return AppBar(
-        title: Text(widget.title),
-      );
+      title: Text(widget.title),
+    );
   }
 
   Widget _menu() {
@@ -42,122 +44,185 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
       height: 100.0,
       color: Colors.red,
       child: TabBar(
-      labelColor: Colors.white,
-      unselectedLabelColor: Colors.white70,
-      indicatorSize: TabBarIndicatorSize.tab,
-      indicatorPadding: EdgeInsets.all(10.0),
-      indicatorColor: Colors.white,
-      tabs: _tabs,
-      onTap: (index) {
-        _selectedTabIndex = index;
-        setState(() {});
-      },
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white70,
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicatorPadding: EdgeInsets.all(10.0),
+        indicatorColor: Colors.white,
+        tabs: _tabs,
+        onTap: (index) {
+          _selectedTabIndex = index;
+          setState(() {});
+        },
       ),
     );
   }
 
   Widget _refreshMovesButton() {
     return FloatingActionButton(
-        onPressed: () => controller.flushMovesButtonPressed(),
-        tooltip: 'Flush Salsa Moves',
-        child: Icon(Icons.refresh),
-      );
+      onPressed: () => controller.flushMovesButtonPressed(),
+      tooltip: 'Flush Salsa Moves',
+      child: Icon(Icons.refresh),
+    );
   }
 
   Widget _ratePerformanceButton() {
     return FloatingActionButton(
-        onPressed: () => controller.ratePerformanceButtonPressed(),
-        tooltip: 'Rate Performance',
-        child: Icon(Icons.check),
-      );
+      onPressed: () => controller.ratePerformanceButtonPressed(),
+      tooltip: 'Rate Performance',
+      child: Icon(Icons.check),
+    );
   }
 
   var _doOnce = true;
 
   Widget _moveTableViewCell(Move item) {
-    return Container(height: 100.0, child: Text(item.name + ': ' + item.description + ' - ' + item.urlString));
+    return Container(
+        height: 100.0,
+        child:
+            Text(item.name + ': ' + item.description + ' - ' + item.urlString));
   }
 
   Widget _performTab() {
-
     if (_doOnce) {
       _doOnce = false;
       controller.getAllMoves();
     }
 
-    var children = <Widget> [
-        for(var item in controller.moves ) _moveTableViewCell(item)
+    var children = <Widget>[
+      for (var item in controller.moves) _moveTableViewCell(item)
     ];
 
-    var table = Column(mainAxisAlignment: MainAxisAlignment.center, children: children);
+    var table =
+        Column(mainAxisAlignment: MainAxisAlignment.center, children: children);
     return table;
   }
 
   Widget _achievementsCell(String text, bool isComplete) {
-    return Row(children: <Widget> [
-      new Image.asset(CustomImages.logo, width: 50,),
+    return Row(children: <Widget>[
+      new Image.asset(
+        CustomImages.logo,
+        width: 50,
+      ),
       Text(text),
-      Spacer(flex: 1,),
-      new Image.asset(isComplete ? CustomImages.starOn : CustomImages.starOff, width: 50,),
+      Spacer(
+        flex: 1,
+      ),
+      new Image.asset(
+        isComplete ? CustomImages.starOn : CustomImages.starOff,
+        width: 50,
+      ),
     ]);
   }
 
   Widget _statsTab() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-      child: Column(children: <Widget>[
-        Text("Progress", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
-        SizedBox(height: 10,),
-        Container(child: SimpleBarChart.withSampleData(), height: MediaQuery.of(context).size.height / 3,),
-        SizedBox(height: 50,),
-        Text("Achievements", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
-        SizedBox(height: 10,),
-        Column(children: <Widget>[
-          _achievementsCell("Perform a first dance", true),
-          _achievementsCell("Perform 3 consecutive days", false),
-          _achievementsCell("Perform 5 consecutive days", true),
-          _achievementsCell("Perform 5 consecutive days", true),
-          _achievementsCell("Perform 5 consecutive days", true),
-          _achievementsCell("Perform 5 consecutive days", true),
-          _achievementsCell("Perform 5 consecutive days", true),
-          _achievementsCell("Perform 5 consecutive days", true),
-          _achievementsCell("Perform 5 consecutive days", true),
-        ],)
-      ],),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "Progress",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            child: SimpleBarChart.withSampleData(),
+            height: MediaQuery.of(context).size.height / 4,
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Text(
+            "Achievements",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 4,
+              child: ListView(
+                children: ListTile.divideTiles(
+                  context: context,
+                  tiles: [
+                    for (var i = 0; i < 10; i++)
+                      _achievementsCell("Perform a first dance", true),
+                  ],
+                ).toList(),
+              )),
+        ],
+      ),
     );
   }
 
   Widget _accountView() {
-    return new Container(
-      margin: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 16.0),
-      child: new InkWell(
-        child: new Card(
-          child: new Row(
-            children: <Widget>[
-              new Expanded(
-                child: new ListTile(
-                  leading: new Image.asset(CustomImages.logo, fit: BoxFit.contain,),
-                  title: new Text("Sombrero"),),
-
-              ),
-              new Container(
-                  padding: const EdgeInsets.all(10.0),
-                  color: Colors.blue,child: new Text("3",style: new TextStyle(color: Colors.white),)),
-            ],
+    return ListView(
+      children: ListTile.divideTiles(
+        context: context,
+        tiles: [
+          ListTile(
+            leading: Icon(Icons.wb_sunny),
+            title: Text('Sun'),
           ),
-        ),
-      ),
+          ListTile(
+            title: Text('Moon'),
+          ),
+          ListTile(
+            title: Text('Star'),
+          ),
+        ],
+      ).toList(),
     );
+
+    // Container(
+    //   margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+    //   child: Column(children: <Widget>[
+    //     Text("Moves List", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
+    //     SizedBox(height: 50,),
+    //     Column(children: <Widget>[
+    //       _achievementsCell("Perform a first dance", true),
+    //       _achievementsCell("Perform 3 consecutive days", false),
+    //       _achievementsCell("Perform 5 consecutive days", true),
+    //     ],)
+    //   ],),
+    // );
+    // return new Container(
+    //   margin: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 16.0),
+    //   child: new InkWell(
+    //     child: new Card(
+    //       child: new Row(
+    //         children: <Widget>[
+    //           new Expanded(
+    //             child: new ListTile(
+    //               leading: new Image.asset(CustomImages.logo, fit: BoxFit.contain,),
+    //               title: new Text("Sombrero"),),
+
+    //           ),
+    //           new Container(
+    //               padding: const EdgeInsets.all(10.0),
+    //               color: Colors.blue,child: new Text("3",style: new TextStyle(color: Colors.white),)),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _floatingActionButtons() {
     if (_selectedTabIndex == 0) {
       return Row(children: <Widget>[
-          Spacer(flex: 14,),
-          _refreshMovesButton(),
-          Spacer(flex: 1,),
-          _ratePerformanceButton(),
-        ]);
+        Spacer(
+          flex: 14,
+        ),
+        _refreshMovesButton(),
+        Spacer(
+          flex: 1,
+        ),
+        _ratePerformanceButton(),
+      ]);
     } else {
       return Container();
     }
@@ -166,7 +231,7 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
   @override
   Widget buildPage() {
     return DefaultTabController(
-      length: _tabs.length, 
+      length: _tabs.length,
       child: Scaffold(
         appBar: _appBar(),
         bottomNavigationBar: _menu(),
@@ -177,57 +242,54 @@ class _HomePageState extends ViewState<HomePage, HomeController> with SingleTick
             _performTab(),
             _statsTab(),
             _accountView(),
-        ],),
+          ],
+        ),
       ),
     );
-
   }
-
 }
-      
-      // body: Scaffold(
-      //   key:
-      //       globalKey, // built in global key for the ViewState for easy access in the controller
-      //   body: 
-        
-      //   // Center(
-      //   //   child: Column(
-      //   //     mainAxisAlignment: MainAxisAlignment.center,
-      //   //     children: <Widget>[
-      //   //       Text(
-      //   //         // use data provided by the controller
-      //   //         'Button pressed ${controller.counter} times.',
-      //   //       ),
-      //   //       Text(
-      //   //         'The current user is',
-      //   //       ),
-      //   //       Text(
-      //   //         controller.user == null ? '' : '${controller.user}',
-      //   //         style: Theme.of(context).textTheme.display1,
-      //   //       ),
-      //   //       RaisedButton(
-      //   //         onPressed: controller.getUser,
-      //   //         child: Text(
-      //   //           'Get User',
-      //   //           style: TextStyle(
-      //   //             fontFamily: CustomFonts.montserratBlack, 
-      //   //             color: Colors.white
-      //   //             ),
-      //   //         ),
-      //   //         color: Colors.blue,
-      //   //       ),
-      //   //       RaisedButton(
-      //   //         onPressed: controller.getUserwithError,
-      //   //         child: Text(
-      //   //           'Get User Error',
-      //   //           style: TextStyle(color: Colors.white),
-      //   //         ),
-      //   //         color: Colors.blue,
-      //   //       )
-      //   //     ],
-      //   //   ),
-      //   // ),
 
+// body: Scaffold(
+//   key:
+//       globalKey, // built in global key for the ViewState for easy access in the controller
+//   body:
 
+//   // Center(
+//   //   child: Column(
+//   //     mainAxisAlignment: MainAxisAlignment.center,
+//   //     children: <Widget>[
+//   //       Text(
+//   //         // use data provided by the controller
+//   //         'Button pressed ${controller.counter} times.',
+//   //       ),
+//   //       Text(
+//   //         'The current user is',
+//   //       ),
+//   //       Text(
+//   //         controller.user == null ? '' : '${controller.user}',
+//   //         style: Theme.of(context).textTheme.display1,
+//   //       ),
+//   //       RaisedButton(
+//   //         onPressed: controller.getUser,
+//   //         child: Text(
+//   //           'Get User',
+//   //           style: TextStyle(
+//   //             fontFamily: CustomFonts.montserratBlack,
+//   //             color: Colors.white
+//   //             ),
+//   //         ),
+//   //         color: Colors.blue,
+//   //       ),
+//   //       RaisedButton(
+//   //         onPressed: controller.getUserwithError,
+//   //         child: Text(
+//   //           'Get User Error',
+//   //           style: TextStyle(color: Colors.white),
+//   //         ),
+//   //         color: Colors.blue,
+//   //       )
+//   //     ],
+//   //   ),
+//   // ),
 
-      // ),
+// ),
