@@ -9,11 +9,11 @@ class DataAchievementsRepository extends AchievementsRepository {
   DataAchievementsRepository._internal() {
     achievements = List<Achievement>();
     achievements.addAll([
-      Achievement(1, 'Finding your feet', 'Perform a first dance'),
-      Achievement(1, 'Warm Up', 'Perform 3 consecutive days'),
-      Achievement(1, 'Salsero', 'Perform 5 consecutive days'),
-      Achievement(1, 'Performer', 'Perform 10 consecutive days'),
-      Achievement(1, 'Star', 'Perform 25 consecutive days'),
+      Achievement("1", 'Finding your feet', 'Perform a first dance'),
+      Achievement("2", 'Warm Up', 'Perform 3 consecutive days'),
+      Achievement("3", 'Salsero', 'Perform 5 consecutive days'),
+      Achievement("4", 'Performer', 'Perform 10 consecutive days'),
+      Achievement("5", 'Star', 'Perform 25 consecutive days'),
     ]);
   }
   factory DataAchievementsRepository() => _instance;
