@@ -57,7 +57,8 @@ class HomeController extends Controller {
 
   void flushMovesButtonPressed() {
     print("flushMovesButtonPressed");
-    refreshUI();
+    homePresenter.getAllMoves();
+    //refreshUI();
   }
 
   void ratePerformanceButtonPressed() {
