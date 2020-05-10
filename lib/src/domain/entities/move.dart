@@ -3,8 +3,9 @@ class Move {
   final String tempo;
   final String description;
   final String urlString;
-  Move(this.name, this.tempo, this.description, this.urlString);
+  final int difficulty;
+  Move(this.name, this.tempo, this.description, this.urlString, this.difficulty);
 
   @override
-  String toString() => '$name, $tempo, $description, $urlString';
+  String toString() => '$name, $tempo, $description, $urlString, $difficulty';
 }

@@ -9,9 +9,9 @@ class DataMovesRepository extends MovesRepository {
   DataMovesRepository._internal() {
     moves = List<Move>();
     moves.addAll([
-      Move('Sombrero', 'Tempo: 4 * 4', 'The Sombrero move', 'https://www.youtube.com/embed/AqnNTeRs2Pw'),
-      Move('El Uno', 'Tempo: 4 * 4', 'The El Uno move', 'https://www.youtube.com/embed/Imw-H_bQb1c'),
-      Move('El Dos', 'Tempo: 4 * 4', 'The El Dos move', 'https://www.youtube.com/embed/WQXHNy77fgY'),
+      Move('Sombrero', 'Tempo: 4 * 4', 'The Sombrero move', 'https://www.youtube.com/embed/AqnNTeRs2Pw', 1),
+      Move('El Uno', 'Tempo: 4 * 4', 'The El Uno move', 'https://www.youtube.com/embed/Imw-H_bQb1c', 2),
+      Move('El Dos', 'Tempo: 4 * 4', 'The El Dos move', 'https://www.youtube.com/embed/WQXHNy77fgY', 2),
     ]);
   }
   factory DataMovesRepository() => _instance;

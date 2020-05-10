@@ -1,3 +1,5 @@
+import 'package:salsa_memo/src/data/repositories/random_moves_generator.dart';
+
 import '../../../domain/usecases/get_all_moves_usecase.dart';
 import '../../../domain/usecases/get_user_usecase.dart';
 
@@ -12,7 +14,7 @@ class HomePresenter extends Presenter {
 
   final GetUserUseCase getUserUseCase;
   final GetAllMovesUseCase getAllMovesUseCase;
-  HomePresenter(usersRepo, movesRepo) : getUserUseCase = GetUserUseCase(usersRepo), getAllMovesUseCase = GetAllMovesUseCase(movesRepo);
+  HomePresenter(usersRepo, movesRepo) : getUserUseCase = GetUserUseCase(usersRepo), getAllMovesUseCase = GetAllMovesUseCase(movesRepo, RandomMovesGenerator());
 
   void getUser(String uid) {
     // execute getUseruserCase
@@ -23,7 +25,7 @@ class HomePresenter extends Presenter {
   void getAllMoves() {
     getAllMovesUseCase.execute(
         _GetAllMovesUseCaseObserver(this),
-        GetAllMovesUseCaseParams());
+        GetAllMovesUseCaseParams(2));
   }
 
   @override

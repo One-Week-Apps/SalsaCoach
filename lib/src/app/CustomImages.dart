@@ -5,4 +5,5 @@ class CustomImages {
   static const logo = _imagesPrefix + "icon.png";
   static const starOff = _imagesPrefix + "star_off.png";
   static const starOn = _imagesPrefix + "star_on.png";
+  static const fire = _imagesPrefix + "fire.png";
 }
