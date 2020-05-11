@@ -4,6 +4,19 @@ class Performance {
   PerformanceScore score;
 
   Performance(this.id, this.score, this.dateTime);
+
+  Performance.fromJson(Map<String, dynamic> json)
+  : id = json['id'], 
+  score = PerformanceScore(0, 0, 0, 0, 0, 0, 0), 
+  dateTime = DateTime.fromMillisecondsSinceEpoch(json['dateTime']);
+    // dateTime = json['dateTime'],
+    // score = json['score'];
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'dateTime': dateTime.millisecondsSinceEpoch,
+    // 'score': [score.tempo.toString(), score.bodyMovement.toString(), score.tracing.toString(), score.hairBrushes.toString(), score.blocks.toString(), score.locks.toString(), score.handToss.toString()]
+  };
 }
 
 class PerformanceScore {

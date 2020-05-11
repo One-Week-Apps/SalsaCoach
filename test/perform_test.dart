@@ -44,7 +44,7 @@ void main() {
     });
   });
 
-  test('Validate preformance', () async {
+  test('Validate performance', () async {
     var expectedId = 1;
     var expectedPerformanceScore = PerformanceScore(1, 2, 3, 4, 5, 1, 2);
     var expectedDateTime = DateTime.now();

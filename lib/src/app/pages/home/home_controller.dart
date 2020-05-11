@@ -48,6 +48,10 @@ class HomeController extends Controller {
       _moves = moves;
       refreshUI();
     };
+
+    homePresenter.addPerformanceOnNext = () {
+      print('Performance added!');
+    };
   }
 
   void getUser() => homePresenter.getUser('test-uid');
@@ -63,6 +67,7 @@ class HomeController extends Controller {
 
   void ratePerformanceButtonPressed() {
     print("ratePerformanceButtonPressed");
+    homePresenter.addPerformance();
     refreshUI();
   }
 

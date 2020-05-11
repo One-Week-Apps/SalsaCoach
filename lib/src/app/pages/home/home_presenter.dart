@@ -1,4 +1,6 @@
+import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
 import 'package:salsa_memo/src/data/repositories/random_moves_generator.dart';
+import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
 
 import '../../../domain/usecases/get_all_moves_usecase.dart';
 import '../../../domain/usecases/get_user_usecase.dart';
@@ -12,9 +14,15 @@ class HomePresenter extends Presenter {
 
   Function getAllMovesOnNext;
 
+  Function addPerformanceOnNext;
+
   final GetUserUseCase getUserUseCase;
   final GetAllMovesUseCase getAllMovesUseCase;
-  HomePresenter(usersRepo, movesRepo) : getUserUseCase = GetUserUseCase(usersRepo), getAllMovesUseCase = GetAllMovesUseCase(movesRepo, RandomMovesGenerator());
+  final RatePerformanceUseCase ratePerformanceUseCase;
+  HomePresenter(usersRepo, movesRepo) : 
+    getUserUseCase = GetUserUseCase(usersRepo), 
+    getAllMovesUseCase = GetAllMovesUseCase(movesRepo, RandomMovesGenerator()),
+    ratePerformanceUseCase = RatePerformanceUseCase(SharedPreferencesPerformanceRepository());
 
   void getUser(String uid) {
     // execute getUseruserCase
@@ -28,11 +36,34 @@ class HomePresenter extends Presenter {
         GetAllMovesUseCaseParams(2));
   }
 
+  void addPerformance() {
+    ratePerformanceUseCase.execute(
+      _AddPerformanceUseCaseObserver(this)
+    );
+  }
+
   @override
   void dispose() {
     getUserUseCase.dispose();
     getAllMovesUseCase.dispose();
   }
+}
+
+class _AddPerformanceUseCaseObserver extends Observer<RatePerformanceUseCaseResponse> {
+  final HomePresenter presenter;
+  _AddPerformanceUseCaseObserver(this.presenter);
+  @override
+  void onComplete() {}
+
+  @override
+  void onError(e) {}
+  
+  @override
+  void onNext(response) {
+    assert(presenter.getUserOnNext != null);
+    presenter.addPerformanceOnNext();
+  }
+
 }
 
 class _GetAllMovesUseCaseObserver extends Observer<GetAllMovesUseCaseResponse> {
