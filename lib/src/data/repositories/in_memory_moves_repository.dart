@@ -3,9 +3,7 @@ import 'package:salsa_memo/src/domain/repositories/moves_repository.dart';
 
 class InMemoryMovesRepository extends MovesRepository {
   List<Move> moves;
-  InMemoryMovesRepository(this.moves) {
-    this.moves = moves;
-  }
+  InMemoryMovesRepository(this.moves);
   
   @override
   Future<List<Move>> getAllMoves() async {

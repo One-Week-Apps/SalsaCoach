@@ -1,8 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:salsa_memo/src/data/repositories/in_memory_moves_repository.dart';
+import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
 import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_memo/src/domain/entities/performance_score.dart';
 import 'package:salsa_memo/src/domain/repositories/random_generator.dart';
 import 'package:salsa_memo/src/domain/usecases/get_all_moves_usecase.dart';
+import 'package:salsa_memo/src/domain/usecases/get_performances_usecase.dart';
+import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
 
 class RandomGeneratorMock implements RandomGenerator {
   RandomGeneratorMock(List<Move> value) { 
@@ -36,8 +40,43 @@ void main() {
 
     var response = await sut.buildUseCaseStream(GetAllMovesUseCaseParams(count));
     response.forEach((element) {
-      print(element.moves);
       expect(element.moves, expected);
+    });
+  });
+
+  test('Validate preformance', () async {
+    var expectedId = 1;
+    var expectedPerformanceScore = PerformanceScore(1, 2, 3, 4, 5, 1, 2);
+    var expectedDateTime = DateTime.now();
+    var performance = Performance(expectedId, expectedPerformanceScore, expectedDateTime);
+
+    var perfsRepo = InMemoryPerformanceRepository([]);
+    var sut = RatePerformanceUseCase(perfsRepo);
+
+    var response = await sut.buildUseCaseStream(RatePerformanceUseCaseParams(performance));
+    response.forEach((element) async {
+      expect(element.status, true);
+      var all = await perfsRepo.all();
+      all.forEach((element) {
+        expect(element.id, expectedId);
+        expect(element.score, expectedPerformanceScore);
+        expect(element.dateTime, expectedDateTime);
+      });
+    });
+  });
+
+  test('Retrieve preformances', () async {
+    var expectedId = 1;
+    var expectedPerformanceScore = PerformanceScore(1, 2, 3, 4, 5, 1, 2);
+    var expectedDateTime = DateTime.now();
+    var performance = Performance(expectedId, expectedPerformanceScore, expectedDateTime);
+
+    var perfsRepo = InMemoryPerformanceRepository([performance]);
+    var sut = GetPerformancesUseCase(perfsRepo);
+
+    var response = await sut.buildUseCaseStream(GetAllPerformancesUseCaseParams());
+    response.forEach((element) async {
+      expect(element.perfs, [performance]);
     });
   });
 }
