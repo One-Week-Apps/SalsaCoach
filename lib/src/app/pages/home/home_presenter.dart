@@ -1,5 +1,6 @@
 import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
 import 'package:salsa_memo/src/data/repositories/random_moves_generator.dart';
+import 'package:salsa_memo/src/domain/entities/performance_score.dart';
 import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
 
 import '../../../domain/usecases/get_all_moves_usecase.dart';
@@ -36,9 +37,10 @@ class HomePresenter extends Presenter {
         GetAllMovesUseCaseParams(2));
   }
 
-  void addPerformance() {
+  void addPerformance(Performance perf) {
     ratePerformanceUseCase.execute(
-      _AddPerformanceUseCaseObserver(this)
+      _AddPerformanceUseCaseObserver(this),
+      RatePerformanceUseCaseParams(perf)
     );
   }
 

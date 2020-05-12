@@ -71,7 +71,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
 
   Widget _ratePerformanceButton() {
     return FloatingActionButton(
-      onPressed: () => controller.ratePerformanceButtonPressed(),
+      onPressed: () => controller.ratePerformanceButtonPressed(context),
       tooltip: 'Rate Performance',
       child: Icon(Icons.check),
     );
