@@ -16,6 +16,8 @@ class SharedPref {
   save(String key, value) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(key, json.encode(value));
+    var jjson = prefs.getString(key);
+    print("saved: $jjson");
   }
 
   remove(String key) async {
@@ -45,18 +47,6 @@ class SharedPreferencesPerformanceRepository extends PerformanceRepository {
       performance
     );
 
-    // var value = await _sharedPref.read(key);
-
-    // print("KEY = $key");
-    // print("VALUE = ${value["id"]}");
-    // try {
-    //   Performance perf = Performance.fromJson(value);
-    //   print("perf $perf");
-    // } catch (e) {
-
-    // }
-    
-
     return true;
   }
   
@@ -70,22 +60,16 @@ class SharedPreferencesPerformanceRepository extends PerformanceRepository {
       return [];
     }
     
-    // for (var i = 0 ; i < performanceCount ; i++) {
-    //   var key = _makePerformanceKey(i);
-    //   var perf = await _sharedPref.read(key);
-    //   perfs.add(perf);
-    // }
-    try {
-      print("AAAAA");
-      var perfJson = await _sharedPref.read(_makePerformanceKey(1));
-      var perf = Performance.fromJson(perfJson);
-
-      perfs.add(perf);
-      print("BBBBB $perf");
-    } catch (e) {
-      print("EEEEE");
+    for (var i = 1 ; i < (performanceCount + 1) ; i++) {
+      var key = _makePerformanceKey(i);
+      try {
+        var perfJson = await _sharedPref.read(key);
+        var perf = Performance.fromJson(perfJson);
+        perfs.add(perf);
+      } catch (e) {
+        print("error: ${e.toString()}");
+      }
     }
-    
 
     return perfs;
   }
