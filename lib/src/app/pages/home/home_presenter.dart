@@ -1,6 +1,7 @@
 import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
 import 'package:salsa_memo/src/data/repositories/random_moves_generator.dart';
 import 'package:salsa_memo/src/domain/entities/performance_score.dart';
+import 'package:salsa_memo/src/domain/usecases/get_performances_usecase.dart';
 import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
 
 import '../../../domain/usecases/get_all_moves_usecase.dart';
@@ -16,25 +17,29 @@ class HomePresenter extends Presenter {
   Function getAllMovesOnNext;
 
   Function addPerformanceOnNext;
+  
+  Function getPerformancesOnNext;
 
   final GetUserUseCase getUserUseCase;
   final GetAllMovesUseCase getAllMovesUseCase;
   final RatePerformanceUseCase ratePerformanceUseCase;
+  final GetPerformancesUseCase getPerformancesUseCase;
   HomePresenter(usersRepo, movesRepo) : 
     getUserUseCase = GetUserUseCase(usersRepo), 
     getAllMovesUseCase = GetAllMovesUseCase(movesRepo, RandomMovesGenerator()),
+    getPerformancesUseCase = GetPerformancesUseCase(SharedPreferencesPerformanceRepository()),
     ratePerformanceUseCase = RatePerformanceUseCase(SharedPreferencesPerformanceRepository());
 
   void getUser(String uid) {
-    // execute getUseruserCase
     getUserUseCase.execute(
         _GetUserUseCaseObserver(this), GetUserUseCaseParams(uid));
   }
 
   void getAllMoves() {
+    int movesToPerformCount = 5;
     getAllMovesUseCase.execute(
         _GetAllMovesUseCaseObserver(this),
-        GetAllMovesUseCaseParams(2));
+        GetAllMovesUseCaseParams(movesToPerformCount));
   }
 
   void addPerformance(Performance perf) {
@@ -42,6 +47,12 @@ class HomePresenter extends Presenter {
       _AddPerformanceUseCaseObserver(this),
       RatePerformanceUseCaseParams(perf)
     );
+  }
+
+  void getAllPerformances() {
+    getPerformancesUseCase.execute(
+        _GetAllPerformancesUseCaseObserver(this),
+        GetAllPerformancesUseCaseParams());
   }
 
   @override
@@ -66,6 +77,20 @@ class _AddPerformanceUseCaseObserver extends Observer<RatePerformanceUseCaseResp
     presenter.addPerformanceOnNext();
   }
 
+}
+
+class _GetAllPerformancesUseCaseObserver extends Observer<GetAllPerformancesUseCaseResponse> {
+  final HomePresenter presenter;
+  _GetAllPerformancesUseCaseObserver(this.presenter);
+  @override
+  void onComplete() {}
+  @override
+  void onError(e) {}
+  @override
+  void onNext(response) {
+    assert(presenter.getPerformancesOnNext != null);
+    presenter.getPerformancesOnNext(response.perfs);
+  }
 }
 
 class _GetAllMovesUseCaseObserver extends Observer<GetAllMovesUseCaseResponse> {

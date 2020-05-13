@@ -37,11 +37,13 @@ class HomeController extends Controller {
   int _counter;
   User _user;
   List<Move> _moves;
+  List<Performance> _performances;
   
   // data used by the View
   int get counter => _counter;
   User get user => _user;
   List<Move> get moves => _moves;
+  List<Performance> get performances => _performances;
   
   final HomePresenter homePresenter;
   // Presenter should always be initialized this way
@@ -80,12 +82,19 @@ class HomeController extends Controller {
     homePresenter.addPerformanceOnNext = () {
       print('Performance added!');
     };
+
+    homePresenter.getPerformancesOnNext = (List<Performance> perfs) {
+      print(perfs.toString());
+      _performances = perfs;
+      refreshUI();
+    };
   }
 
   void getUser() => homePresenter.getUser('test-uid');
   void getUserwithError() => homePresenter.getUser('test-uid231243');
 
   void getAllMoves() => homePresenter.getAllMoves();
+  void getAllPerformances() => homePresenter.getAllPerformances();
 
   void flushMovesButtonPressed() {
     print("flushMovesButtonPressed");
@@ -95,7 +104,7 @@ class HomeController extends Controller {
 
   void ratePerformanceButtonPressed(BuildContext context) {
     print("ratePerformanceButtonPressed");
-    showCustomDialogWithImage(context);
+    showRatingDialog(context);
   }
 
   void ratePerformanceValidated() {
@@ -160,7 +169,7 @@ class HomeController extends Controller {
     ]);
   }
 
-  void showCustomDialogWithImage(BuildContext context) {
+  void showRatingDialog(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     Dialog dialogWithImage = Dialog(
       child: Container(

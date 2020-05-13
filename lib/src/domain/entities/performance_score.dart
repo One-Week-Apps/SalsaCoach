@@ -26,6 +26,8 @@ class PerformanceScore {
     int locks;
     int handToss;
 
+    int get total => tempo + bodyMovement + tracing + hairBrushes + blocks + locks + handToss;
+
     PerformanceScore(this.tempo, this.bodyMovement, this.tracing, this.hairBrushes, this.blocks, this.locks, this.handToss) 
     : assert(tempo <= 5),
       assert(bodyMovement <= 5),

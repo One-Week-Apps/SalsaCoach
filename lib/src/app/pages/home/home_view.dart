@@ -55,6 +55,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
         tabs: _tabs,
         onTap: (index) {
           _selectedTabIndex = index;
+          controller.getAllPerformances();
           setState(() {});
         },
       ),
@@ -141,7 +142,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
 
     var table = Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: ListView(
                 children: ListTile.divideTiles(
                   context: context,
@@ -151,18 +152,28 @@ class _HomePageState extends ViewState<HomePage, HomeController>
 
     // var table =
         // Column(mainAxisAlignment: MainAxisAlignment.center, children: children);
-    return table;
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      Text("Moves List", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0)),
+      Spacer(flex: 1),
+      Text("Try to perform those moves \nin one dance ! \n\nThen rate your dance style using the validate button below. \n\nFollowers can still rate \ntheir dance style even if not \nperforming these moves.\n", textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+      Spacer(flex: 1),
+      table,
+      Spacer(flex: 1),
+    ],);//table;
   }
 
   Widget _achievementsCell(String text, bool isComplete) {
     return Row(children: <Widget>[
       new Image.asset(
-        CustomImages.logo,
-        width: 50,
+        CustomImages.cup,
+        width: 40,
+      ),
+      Spacer(
+        flex: 1,
       ),
       Text(text),
       Spacer(
-        flex: 1,
+        flex: 8,
       ),
       new Image.asset(
         isComplete ? CustomImages.starOn : CustomImages.starOff,
@@ -184,8 +195,8 @@ class _HomePageState extends ViewState<HomePage, HomeController>
             height: 10,
           ),
           Container(
-            child: SimpleBarChart.withSampleData(),
-            height: MediaQuery.of(context).size.height / 4,
+            child: SimpleBarChart.withPerformances(controller.performances ?? []),
+            height: MediaQuery.of(context).size.height / 3.5,
           ),
           SizedBox(
             height: 50,
@@ -199,13 +210,13 @@ class _HomePageState extends ViewState<HomePage, HomeController>
           ),
           Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 4,
+              height: MediaQuery.of(context).size.height / 3.5,
               child: ListView(
                 children: ListTile.divideTiles(
                   context: context,
                   tiles: [
                     for (var i = 0; i < 10; i++)
-                      _achievementsCell("Perform a first dance", true),
+                      _achievementsCell("Coming soon...", true),
                   ],
                 ).toList(),
               )),
