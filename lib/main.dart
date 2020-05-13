@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import './src/app/pages/home/home_view.dart';
@@ -9,6 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterCleanArchitecture.debugModeOn();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     return MaterialApp(
       title: 'Salsa Memo',
       theme: ThemeData(
