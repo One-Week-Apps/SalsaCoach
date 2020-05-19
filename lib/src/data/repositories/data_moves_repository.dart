@@ -18,6 +18,8 @@ class DataMovesRepository extends MovesRepository {
       Move('Vacilala Vacilense', 'Key Times: 4 * 4', 'The Vacilala Vacilense move', 'https://www.youtube.com/embed/Obl71WOOjJ4', 2),
       Move('Enchufela Doble', 'Key Times: 4 * 4', 'The Enchufela Doble move', 'https://www.youtube.com/embed/r2KcM4wxOC4', 2),
       Move('Exhibela Doble', 'Key Times: 4 * 4', 'The Exhibela Doble move', 'https://www.youtube.com/embed/o4nkV-0Ts9Q', 2),
+      Move('Cementario', 'Key Times: 4 * 4', 'The Cementario move', 'https://www.youtube.com/embed/itBdgUz4hMA', 3),
+      Move('Nudo', 'Key Times: 4 * 4', 'The Nudo move', 'https://www.youtube.com/embed/cUHjbSiQU9Y', 3),
     ]);
   }
   factory DataMovesRepository() => _instance;
