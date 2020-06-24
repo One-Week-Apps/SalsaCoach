@@ -8,4 +8,5 @@ class CustomFonts {
   static const montserratExtraBold = 'Montserrat-ExtraBold';
   static const montserratMedium = 'Montserrat-Medium';
   static const montserratSemiBold = 'Montserrat-SemiBold';
+  static const salsaRegular = 'Salsa-Regular';
 }

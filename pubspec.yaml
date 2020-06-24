@@ -36,6 +36,16 @@ dependencies:
   url_launcher: ^5.4.5
   intl: ^0.16.1
 
+  lottie: ^0.4.0+1
+
+  google_fonts: ^0.1.0
+
+  html: ^0.14.0+3
+  http: 0.12.0+4
+
+  flutter_webview_plugin: 0.3.0+2
+  webview_flutter: 0.2.0
+
 dev_dependencies:
   mockito: ^4.1.1
   flutter_test:
@@ -58,11 +68,29 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
+    - assets/animations/Onboarding_Slide_Left_Arrows_Animation.json
+
     - assets/images/icon.png
     - assets/images/star_off.png
     - assets/images/star_on.png
     - assets/images/fire.png
     - assets/images/cup.png
+    - assets/images/trophy.png
+    - assets/images/stats.png
+    - assets/images/onboarding_move.png
+    - assets/images/onboarding_done.png
+    - assets/images/onboarding_rating.png
+    - assets/images/onboarding_move_details.png
+    - assets/images/onboarding_achievements.png
+    - assets/images/locked.png
+    - assets/images/unlocked.png
+    - assets/images/placeholder_1.png
+    - assets/images/placeholder_2.png
+    - assets/images/like.png
+    - assets/images/dislike.png
+    - assets/images/achievements_view_outer.png
+    - assets/images/achievements_background.png
+    - assets/images/play_button.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -104,3 +132,6 @@ flutter:
     - family: Luciole
       fonts:
         - asset: assets/fonts/Luciole-Regular.ttf
+    - family: Salsa
+      fonts:
+        - asset: assets/fonts/Salsa-Regular.ttf

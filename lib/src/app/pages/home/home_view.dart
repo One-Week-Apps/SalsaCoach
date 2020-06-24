@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:salsa_memo/src/app/CustomImages.dart';
 import 'package:salsa_memo/src/app/widgets/simple_bar_chart.dart';
 import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
+import 'package:salsa_memo/src/data/repositories/remote_moves_repository.dart';
 import 'package:salsa_memo/src/domain/entities/move.dart';
 
 import './home_controller.dart';
@@ -243,39 +244,6 @@ class _HomePageState extends ViewState<HomePage, HomeController>
         ],
       ).toList(),
     );
-
-    // Container(
-    //   margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-    //   child: Column(children: <Widget>[
-    //     Text("Moves List", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
-    //     SizedBox(height: 50,),
-    //     Column(children: <Widget>[
-    //       _achievementsCell("Perform a first dance", true),
-    //       _achievementsCell("Perform 3 consecutive days", false),
-    //       _achievementsCell("Perform 5 consecutive days", true),
-    //     ],)
-    //   ],),
-    // );
-    // return new Container(
-    //   margin: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 16.0),
-    //   child: new InkWell(
-    //     child: new Card(
-    //       child: new Row(
-    //         children: <Widget>[
-    //           new Expanded(
-    //             child: new ListTile(
-    //               leading: new Image.asset(CustomImages.logo, fit: BoxFit.contain,),
-    //               title: new Text("Sombrero"),),
-
-    //           ),
-    //           new Container(
-    //               padding: const EdgeInsets.all(10.0),
-    //               color: Colors.blue,child: new Text("3",style: new TextStyle(color: Colors.white),)),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 
   Widget _floatingActionButtons() {
@@ -315,48 +283,3 @@ class _HomePageState extends ViewState<HomePage, HomeController>
     );
   }
 }
-
-// body: Scaffold(
-//   key:
-//       globalKey, // built in global key for the ViewState for easy access in the controller
-//   body:
-
-//   // Center(
-//   //   child: Column(
-//   //     mainAxisAlignment: MainAxisAlignment.center,
-//   //     children: <Widget>[
-//   //       Text(
-//   //         // use data provided by the controller
-//   //         'Button pressed ${controller.counter} times.',
-//   //       ),
-//   //       Text(
-//   //         'The current user is',
-//   //       ),
-//   //       Text(
-//   //         controller.user == null ? '' : '${controller.user}',
-//   //         style: Theme.of(context).textTheme.display1,
-//   //       ),
-//   //       RaisedButton(
-//   //         onPressed: controller.getUser,
-//   //         child: Text(
-//   //           'Get User',
-//   //           style: TextStyle(
-//   //             fontFamily: CustomFonts.montserratBlack,
-//   //             color: Colors.white
-//   //             ),
-//   //         ),
-//   //         color: Colors.blue,
-//   //       ),
-//   //       RaisedButton(
-//   //         onPressed: controller.getUserwithError,
-//   //         child: Text(
-//   //           'Get User Error',
-//   //           style: TextStyle(color: Colors.white),
-//   //         ),
-//   //         color: Colors.blue,
-//   //       )
-//   //     ],
-//   //   ),
-//   // ),
-
-// ),
