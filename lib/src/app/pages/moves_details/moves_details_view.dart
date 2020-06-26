@@ -4,13 +4,17 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salsa_memo/src/app/CustomImages.dart';
 import 'package:salsa_memo/src/data/repositories/data_liked_moves_gateway.dart';
+import 'package:salsa_memo/src/domain/entities/achievement.dart';
 import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_memo/src/domain/usecases/achievements_observer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MovesDetailsRoute extends StatefulWidget {
+  static const routeName = '/movesDetails';
+  final AchievementsObserver achievementsObserver;
   final Move move;
 
-  MovesDetailsRoute(this.move);
+  MovesDetailsRoute(this.achievementsObserver, this.move);
 
   @override
   State<StatefulWidget> createState() {

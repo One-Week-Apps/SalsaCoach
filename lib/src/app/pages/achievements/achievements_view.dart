@@ -97,9 +97,14 @@ class _AchievementsRouteState
         ]));
   }
 
+  var doOnce = true;
+
   @override
   Widget buildPage() {
-    controller.executeAchievements(AchievementsRequestType.doFetch, null);
+    if (doOnce) {
+      doOnce = false;
+      controller.executeAchievements(AchievementsRequestType.doFetch, null);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -111,9 +116,9 @@ class _AchievementsRouteState
           IconButton(
             icon: Image.asset(CustomImages.stats),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StatsRoute()),
+              Navigator.pushNamed(
+                context, 
+                StatsRoute.routeName
               );
             },
           )

@@ -1,9 +1,11 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:salsa_memo/src/app/pages/achievements/achievements_presenter.dart';
 import 'package:salsa_memo/src/domain/entities/achievement.dart';
+import 'package:salsa_memo/src/domain/entities/achievement_types.dart';
+import 'package:salsa_memo/src/domain/usecases/achievements_observer.dart';
 import 'package:salsa_memo/src/domain/usecases/achievements_usecase.dart';
 
-class AchievementsController extends Controller {
+class AchievementsController extends Controller with AchievementsObserver {
   List<Achievement> _achievements;
 
   // data used by the View
@@ -27,5 +29,10 @@ class AchievementsController extends Controller {
   void dispose() {
     presenter.dispose(); // don't forget to dispose of the presenter
     super.dispose();
+  }
+
+  @override
+  void update(AchievementTypes type) {
+    print("update for " + type.toString());
   }
 }

@@ -105,9 +105,9 @@ class OnboardingRoute extends StatelessWidget {
                 RaisedButton(
                   child: Text('Lets go!'),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => MovesListingRoute()),
+                    Navigator.pushReplacementNamed(
+                      context, 
+                      MovesListingRoute.routeName
                     );
                   },
                 ),

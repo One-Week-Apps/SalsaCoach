@@ -4,17 +4,21 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:salsa_memo/main.dart';
 import 'package:salsa_memo/src/app/CustomImages.dart';
 import 'package:salsa_memo/src/app/pages/moves_details/moves_details_view.dart';
 import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
 import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_memo/src/domain/usecases/achievements_observer.dart';
 
 import '../../../data/repositories/data_users_repository.dart';
 import '../achievements/achievements_view.dart';
 import '../home/home_controller.dart';
 
 class MovesListingRoute extends View {
-  MovesListingRoute({Key key, this.title}) : super(key: key);
+  static const routeName = '/movesListing';
+  final AchievementsObserver achievementsObserver;
+  MovesListingRoute(this.achievementsObserver, {Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -79,10 +83,10 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MovesDetailsRoute(move)),
+                  Navigator.pushNamed(
+                    context, 
+                    MovesDetailsRoute.routeName,
+                    arguments: move
                   );
                 },
               );

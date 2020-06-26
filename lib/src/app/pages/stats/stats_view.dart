@@ -5,12 +5,15 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salsa_memo/src/app/widgets/simple_bar_chart.dart';
 import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
+import 'package:salsa_memo/src/domain/usecases/achievements_observer.dart';
 
 import '../../../data/repositories/data_users_repository.dart';
 import '../home/home_controller.dart';
 
 class StatsRoute extends View {
-  StatsRoute({Key key, this.title}) : super(key: key);
+  static const routeName = '/stats';
+  final AchievementsObserver achievementsObserver;
+  StatsRoute(this.achievementsObserver, {Key key, this.title}) : super(key: key);
 
   final String title;
 
