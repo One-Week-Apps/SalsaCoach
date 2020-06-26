@@ -1,4 +1,3 @@
-import 'package:salsa_memo/src/domain/entities/achievement.dart';
 
 class CustomImages {
   CustomImages._();

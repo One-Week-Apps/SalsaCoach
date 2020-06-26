@@ -1,9 +1,9 @@
+import 'dart:convert';
+
 import 'package:salsa_memo/src/app/SharedPreferencesKeys.dart';
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/repositories/performance_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'dart:convert';
 
 class SharedPref {
   read(String key) async {
@@ -42,14 +42,11 @@ class SharedPreferencesPerformanceRepository extends PerformanceRepository {
     await _sharedPref.save(SharedPreferencesKeys.performanceCount, performanceCount);
 
     var key = _makePerformanceKey(performanceCount);
-    await _sharedPref.save(
-      key, 
-      performance
-    );
+    await _sharedPref.save(key, performance);
 
     return true;
   }
-  
+
   @override
   Future<List<Performance>> all() async {
     var perfs = <Performance>[];
@@ -59,7 +56,7 @@ class SharedPreferencesPerformanceRepository extends PerformanceRepository {
     } catch (e) {
       return [];
     }
-    
+
     for (var i = 1 ; i < (performanceCount + 1) ; i++) {
       var key = _makePerformanceKey(i);
       try {
@@ -82,6 +79,7 @@ class SharedPreferencesPerformanceRepository extends PerformanceRepository {
 
 class InMemoryPerformanceRepository extends PerformanceRepository {
   List<Performance> _perfs;
+
   InMemoryPerformanceRepository(this._perfs);
 
   @override
@@ -89,10 +87,10 @@ class InMemoryPerformanceRepository extends PerformanceRepository {
     this._perfs.add(performance);
     return true;
   }
-  
+
   @override
   Future<List<Performance>> all() async {
     return _perfs;
   }
-  
+
 }

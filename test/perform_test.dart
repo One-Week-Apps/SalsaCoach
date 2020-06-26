@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:salsa_memo/src/data/repositories/in_memory_moves_repository.dart';
 import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
 import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/entities/performance_score.dart';
 import 'package:salsa_memo/src/domain/repositories/random_generator.dart';
 import 'package:salsa_memo/src/domain/usecases/get_all_moves_usecase.dart';

@@ -1,9 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/app/pages/home/onboarding_view.dart';
-
-import './src/app/pages/home/home_view.dart';
-import 'package:flutter/material.dart';
+import 'package:salsa_memo/src/app/pages/onboarding/onboarding_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,10 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Salsa Memo',
       theme: ThemeData(
-        primaryColor: PrimaryColor,
-        primarySwatch: Colors.red,
-        fontFamily: 'Montserrat'
-      ),
+          primaryColor: PrimaryColor,
+          primarySwatch: Colors.red,
+          fontFamily: 'Montserrat'),
       home: OnboardingRoute(),//HomePage(title: 'Salsa Memo 💃'),
       debugShowCheckedModeBanner: false,
     );

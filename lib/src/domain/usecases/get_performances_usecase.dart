@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/repositories/performance_repository.dart';
 
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-
-class GetPerformancesUseCase
-    extends UseCase<GetAllPerformancesUseCaseResponse, GetAllPerformancesUseCaseParams> {
+class GetPerformancesUseCase extends UseCase<GetAllPerformancesUseCaseResponse,
+    GetAllPerformancesUseCaseParams> {
   final PerformanceRepository perfsRepository;
+
   GetPerformancesUseCase(this.perfsRepository);
 
   @override

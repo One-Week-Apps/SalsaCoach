@@ -1,37 +1,15 @@
 //import 'dart:collection';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:salsa_memo/src/app/CustomImages.dart';
 import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/entities/performance_score.dart';
+import 'package:salsa_memo/src/domain/entities/score_types.dart';
 
 import './home_presenter.dart';
 import '../../../domain/entities/user.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-
-enum ScoreTypes {
-  tempo,
-  bodyMovement,
-  tracing,
-  hairBrushes,
-  blocks,
-  locks,
-  handToss
-}
-
-extension ScoreTypesExtension on ScoreTypes {
-  static const _names = {
-    ScoreTypes.tempo: 'Tempo',
-    ScoreTypes.bodyMovement: 'Body Movement',
-    ScoreTypes.tracing: 'Tracing',
-    ScoreTypes.hairBrushes: 'Hair Brushes',
-    ScoreTypes.blocks: 'Blocks',
-    ScoreTypes.locks: 'Locks',
-    ScoreTypes.handToss: 'Hand Toss',
-  };
-
-  String get rawValue => _names[this];
-}
 
 class HomeController extends Controller {
   int _counter;

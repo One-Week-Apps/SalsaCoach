@@ -1,13 +1,12 @@
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
 import 'package:salsa_memo/src/data/repositories/random_moves_generator.dart';
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/usecases/get_performances_usecase.dart';
 import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
 
 import '../../../domain/usecases/get_all_moves_usecase.dart';
 import '../../../domain/usecases/get_user_usecase.dart';
-
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 class HomePresenter extends Presenter {
   Function getUserOnNext;
@@ -17,18 +16,22 @@ class HomePresenter extends Presenter {
   Function getAllMovesOnNext;
 
   Function addPerformanceOnNext;
-  
+
   Function getPerformancesOnNext;
 
   final GetUserUseCase getUserUseCase;
   final GetAllMovesUseCase getAllMovesUseCase;
   final RatePerformanceUseCase ratePerformanceUseCase;
   final GetPerformancesUseCase getPerformancesUseCase;
-  HomePresenter(usersRepo, movesRepo) : 
-    getUserUseCase = GetUserUseCase(usersRepo), 
-    getAllMovesUseCase = GetAllMovesUseCase(movesRepo, RandomMovesGenerator()),
-    getPerformancesUseCase = GetPerformancesUseCase(SharedPreferencesPerformanceRepository()),
-    ratePerformanceUseCase = RatePerformanceUseCase(SharedPreferencesPerformanceRepository());
+
+  HomePresenter(usersRepo, movesRepo)
+      : getUserUseCase = GetUserUseCase(usersRepo),
+        getAllMovesUseCase =
+            GetAllMovesUseCase(movesRepo, RandomMovesGenerator()),
+        getPerformancesUseCase =
+            GetPerformancesUseCase(SharedPreferencesPerformanceRepository()),
+        ratePerformanceUseCase =
+            RatePerformanceUseCase(SharedPreferencesPerformanceRepository());
 
   void getUser(String uid) {
     getUserUseCase.execute(
@@ -37,15 +40,14 @@ class HomePresenter extends Presenter {
 
   void getAllMoves() {
     int movesToPerformCount = 5;
-    getAllMovesUseCase.execute(
-        _GetAllMovesUseCaseObserver(this),
+    getAllMovesUseCase.execute(_GetAllMovesUseCaseObserver(this),
         GetAllMovesUseCaseParams(movesToPerformCount));
   }
 
   void addPerformance(Performance perf) {
     ratePerformanceUseCase.execute(
-      _AddPerformanceUseCaseObserver(this),
-      RatePerformanceUseCaseParams(perf)
+        _AddPerformanceUseCaseObserver(this),
+        RatePerformanceUseCaseParams(perf)
     );
   }
 
@@ -64,13 +66,15 @@ class HomePresenter extends Presenter {
 
 class _AddPerformanceUseCaseObserver extends Observer<RatePerformanceUseCaseResponse> {
   final HomePresenter presenter;
+
   _AddPerformanceUseCaseObserver(this.presenter);
+
   @override
   void onComplete() {}
 
   @override
   void onError(e) {}
-  
+
   @override
   void onNext(response) {
     assert(presenter.getUserOnNext != null);
@@ -81,11 +85,15 @@ class _AddPerformanceUseCaseObserver extends Observer<RatePerformanceUseCaseResp
 
 class _GetAllPerformancesUseCaseObserver extends Observer<GetAllPerformancesUseCaseResponse> {
   final HomePresenter presenter;
+
   _GetAllPerformancesUseCaseObserver(this.presenter);
+
   @override
   void onComplete() {}
+
   @override
   void onError(e) {}
+
   @override
   void onNext(response) {
     assert(presenter.getPerformancesOnNext != null);
@@ -95,11 +103,15 @@ class _GetAllPerformancesUseCaseObserver extends Observer<GetAllPerformancesUseC
 
 class _GetAllMovesUseCaseObserver extends Observer<GetAllMovesUseCaseResponse> {
   final HomePresenter presenter;
+
   _GetAllMovesUseCaseObserver(this.presenter);
+
   @override
   void onComplete() {}
+
   @override
   void onError(e) {}
+
   @override
   void onNext(response) {
     assert(presenter.getUserOnNext != null);
@@ -109,7 +121,9 @@ class _GetAllMovesUseCaseObserver extends Observer<GetAllMovesUseCaseResponse> {
 
 class _GetUserUseCaseObserver extends Observer<GetUserUseCaseResponse> {
   final HomePresenter presenter;
+
   _GetUserUseCaseObserver(this.presenter);
+
   @override
   void onComplete() {
     assert(presenter.getUserOnComplete != null);

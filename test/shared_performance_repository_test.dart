@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/entities/performance_score.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

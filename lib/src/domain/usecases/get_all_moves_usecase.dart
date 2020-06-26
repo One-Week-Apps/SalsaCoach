@@ -1,15 +1,19 @@
 import 'dart:async';
 
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:salsa_memo/src/data/repositories/data_liked_moves_gateway.dart';
+import 'package:salsa_memo/src/domain/repositories/liked_moves_gateway.dart';
 import 'package:salsa_memo/src/domain/repositories/random_generator.dart';
 
 import '../entities/move.dart';
 import '../repositories/moves_repository.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 class GetAllMovesUseCase
     extends UseCase<GetAllMovesUseCaseResponse, GetAllMovesUseCaseParams> {
   final MovesRepository movesRepository;
   final RandomGenerator randomGenerator;
+  final LikedMovesGateway likedMovesGateway = DataLikedMovesGateway();
+
   GetAllMovesUseCase(this.movesRepository, this.randomGenerator);
 
   @override
@@ -22,6 +26,8 @@ class GetAllMovesUseCase
       List<Move> moves = await movesRepository.getAllMoves();
       // filter moves
       var randomMoves = randomGenerator.rand(moves).sublist(0, params.count);
+      randomMoves.forEach((element) async =>
+      element.isLiked = await likedMovesGateway.isLikedMove(element));
       // Adding it triggers the .onNext() in the `Observer`
       // It is usually better to wrap the reponse inside a respose object.
       controller.add(GetAllMovesUseCaseResponse(randomMoves));

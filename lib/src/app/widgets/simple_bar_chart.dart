@@ -1,10 +1,9 @@
 /// Bar chart example
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
-
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 
 class SimpleBarChart extends StatelessWidget {
   final List<charts.Series> seriesList;

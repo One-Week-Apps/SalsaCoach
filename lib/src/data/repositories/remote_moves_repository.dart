@@ -1,19 +1,14 @@
-import 'dart:io';
-
-import '../../domain/entities/move.dart';
-
-import '../../domain/repositories/moves_repository.dart';
-
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import '../../domain/entities/move.dart';
+import '../../domain/repositories/moves_repository.dart';
 
 class RemoteMovesRepository extends MovesRepository {
   List<Move> moves;
   bool _doOnce = true;
   static RemoteMovesRepository _instance = RemoteMovesRepository._internal();
+
   RemoteMovesRepository._internal() {
     moves = List<Move>();
     // moves.addAll([

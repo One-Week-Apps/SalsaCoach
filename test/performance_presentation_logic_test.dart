@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:salsa_memo/src/app/widgets/simple_bar_chart.dart';
+import 'package:salsa_memo/src/domain/entities/performance.dart';
 import 'package:salsa_memo/src/domain/entities/performance_score.dart';
 
 void main() {

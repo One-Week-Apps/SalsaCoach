@@ -1,24 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:salsa_memo/src/app/CustomFonts.dart';
-import 'package:salsa_memo/src/app/CustomImages.dart';
-import 'package:salsa_memo/src/app/pages/home/moves_details_view.dart';
-import 'package:salsa_memo/src/app/widgets/simple_bar_chart.dart';
-import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
-
-import './home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:salsa_memo/src/app/CustomImages.dart';
+import 'package:salsa_memo/src/app/pages/moves_details/moves_details_view.dart';
+import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
+import 'package:salsa_memo/src/domain/entities/move.dart';
+
 import '../../../data/repositories/data_users_repository.dart';
-
-import 'package:url_launcher/url_launcher.dart';
-
-import 'dart:math' as math;
-
-import 'achievements_view.dart';
+import '../achievements/achievements_view.dart';
+import '../home/home_controller.dart';
 
 class MovesListingRoute extends View {
   MovesListingRoute({Key key, this.title}) : super(key: key);
@@ -26,8 +19,7 @@ class MovesListingRoute extends View {
   final String title;
 
   @override
-  _MovesListingRouteState createState() =>
-      _MovesListingRouteState();
+  _MovesListingRouteState createState() => _MovesListingRouteState();
 }
 
 class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeController>
@@ -66,11 +58,11 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
                             flex: 1,
                           ),
                           Image.asset(
-                            CustomImages.like,
-                            width: 20,
-                            height: 20,
-                          )
-                        ],
+                  move.isLiked ? CustomImages.like : CustomImages.dislike,
+                  width: 20,
+                  height: 20,
+                )
+              ],
                       ),
                       Container(
                           alignment: Alignment.centerLeft,

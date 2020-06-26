@@ -1,30 +1,122 @@
+import 'package:salsa_memo/src/app/SharedPreferencesKeys.dart';
+import 'package:salsa_memo/src/domain/entities/achievement_types.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/entities/achievement.dart';
 import '../../domain/repositories/achievements_repository.dart';
 
 class DataAchievementsRepository extends AchievementsRepository {
-  List<Achievement> achievements;
-  static DataAchievementsRepository _instance = DataAchievementsRepository._internal();
-  DataAchievementsRepository._internal() {
-    achievements = List<Achievement>();
-    achievements.addAll([
-      Achievement("1", 'Finding your feet', 'Perform a first dance'),
-      Achievement("2", 'Warm Up', 'Perform 3 consecutive days'),
-      Achievement("3", 'Salsero', 'Perform 5 consecutive days'),
-      Achievement("4", 'Performer', 'Perform 10 consecutive days'),
-      Achievement("5", 'Star', 'Perform 25 consecutive days'),
-    ]);
-  }
-  factory DataAchievementsRepository() => _instance;
+  DataAchievementsRepository._();
 
-  @override
-  Future<List<Achievement>> getAllAchievements() async {
-    return achievements;
+  static DataAchievementsRepository shared = DataAchievementsRepository._();
+
+  List<Achievement> _achievements = [
+    Achievement("0", AchievementTypes.consecutiveDaysAppOpening, "App lover!",
+        "Open the app for 2 consecutive days", true, false, 0, 2),
+    Achievement("1", AchievementTypes.consecutiveDaysAppOpening, "App lover!",
+        "Open the app for 5 consecutive days", true, false, 0, 5),
+    Achievement("2", AchievementTypes.consecutiveDaysAppOpening, "App lover!",
+        "Open the app for 10 consecutive days", true, false, 0, 10),
+    Achievement("10", AchievementTypes.consecutiveDaysDancing,
+        "Daily performer!", "Dance 2 consecutive days", true, false, 0, 2),
+    Achievement("11", AchievementTypes.consecutiveDaysDancing,
+        "Daily performer!", "Dance 5 consecutive days", true, false, 0, 5),
+    Achievement("12", AchievementTypes.consecutiveDaysDancing,
+        "Daily performer!", "Dance 10 consecutive days", true, false, 0, 10),
+    Achievement("20", AchievementTypes.numberOfLikes, "Serial liker!",
+        "Like a total of 5 dances", false, false, 0, 5),
+    Achievement("21", AchievementTypes.numberOfLikes, "Serial liker!",
+        "Like a total of 10 dances", false, false, 0, 10),
+    Achievement("22", AchievementTypes.numberOfLikes, "Serial liker!",
+        "Like a total of 15 dances", false, false, 0, 15),
+    Achievement("30", AchievementTypes.difficulty1, "Rookie dancer!",
+        "Perform a total of 5 moves with difficulty 1", false, false, 0, 5),
+    Achievement("31", AchievementTypes.difficulty1, "Rookie dancer!",
+        "Perform a total of 10 moves with difficulty 1", false, false, 0, 10),
+    Achievement("32", AchievementTypes.difficulty1, "Rookie dancer!",
+        "Perform a total of 15 moves with difficulty 1", false, false, 0, 15),
+    Achievement("40", AchievementTypes.difficulty2, "Simple dancer!",
+        "Perform a total of 5 moves with difficulty 2", false, false, 0, 5),
+    Achievement("41", AchievementTypes.difficulty2, "Simple dancer!",
+        "Perform a total of 10 moves with difficulty 2", false, false, 0, 10),
+    Achievement("42", AchievementTypes.difficulty2, "Simple dancer!",
+        "Perform a total of 15 moves with difficulty 2", false, false, 0, 5),
+    Achievement("50", AchievementTypes.difficulty3, "Intermediate dancer!",
+        "Perform a total of 5 moves with difficulty 3", false, false, 0, 5),
+    Achievement("51", AchievementTypes.difficulty3, "Intermediate dancer!",
+        "Perform a total of 10 moves with difficulty 3", false, false, 0, 10),
+    Achievement("52", AchievementTypes.difficulty3, "Intermediate dancer!",
+        "Perform a total of 15 moves with difficulty 3", false, false, 0, 15),
+    Achievement("60", AchievementTypes.difficulty4, "Advanced dancer!",
+        "Perform a total of 5 moves with difficulty 4", false, false, 0, 5),
+    Achievement("61", AchievementTypes.difficulty4, "Advanced dancer!",
+        "Perform a total of 10 moves with difficulty 4", false, false, 0, 10),
+    Achievement("62", AchievementTypes.difficulty4, "Advanced dancer!",
+        "Perform a total of 15 moves with difficulty 4", false, false, 0, 15),
+    Achievement("70", AchievementTypes.difficulty5, "Expert dancer!",
+        "Perform a total of 5 moves with difficulty 5", false, false, 0, 5),
+    Achievement("71", AchievementTypes.difficulty5, "Expert dancer!",
+        "Perform a total of 10 moves with difficulty 5", false, false, 0, 10),
+    Achievement("72", AchievementTypes.difficulty5, "Expert dancer!",
+        "Perform a total of 15 moves with difficulty 5", false, false, 0, 15),
+    Achievement("80", AchievementTypes.videoLearner, "Video learner!",
+        "Watch a total of 5 videos", false, false, 0, 5),
+    Achievement("81", AchievementTypes.videoLearner, "Video learner!",
+        "Watch a total of 10 videos", false, false, 0, 10),
+    Achievement("82", AchievementTypes.videoLearner, "Video learner!",
+        "Watch a total of 15 videos", false, false, 0, 15),
+    Achievement("90", AchievementTypes.refresher, "Dance picker!",
+        "Use the dance refresh button 5 times", false, false, 0, 5),
+    Achievement("91", AchievementTypes.refresher, "Dance picker!",
+        "Use the dance refresh button 10 times", false, false, 0, 10),
+    Achievement("92", AchievementTypes.refresher, "Dance picker!",
+        "Use the dance refresh button 15 times", false, false, 0, 15),
+    Achievement("100", AchievementTypes.analyst, "Dance analyst!",
+        "Open the Stats tab 5 different days", false, false, 0, 5),
+    Achievement("101", AchievementTypes.analyst, "Dance analyst!",
+        "Open the Stats tab 10 different days", false, false, 0, 10),
+    Achievement("102", AchievementTypes.analyst, "Dance analyst!",
+        "Open the Stats tab 15 different days", false, false, 0, 15),
+  ];
+
+  _keyFor(String uid) {
+    return SharedPreferencesKeys.achievementCurrentStep + "_" + uid;
   }
 
-  @override
-  Future<Achievement> validateAchievement(String uid) {
-    return null;
+  _claimedKeyFor(String uid) {
+    return SharedPreferencesKeys.achievementClaimed + "_" + uid;
+  }
+
+  Future<List<Achievement>> fetch() async {
+    var sharedPrefs = await SharedPreferences.getInstance();
+    var updatedAchievements = _achievements;
+
+    updatedAchievements
+        .map((e) => {e.currentStep = sharedPrefs.getInt(_keyFor(e.uid))});
+
+    updatedAchievements.map((e) =>
+        {e.isRewardClaimed = sharedPrefs.getBool(_claimedKeyFor(e.uid))});
+
+    return updatedAchievements;
+  }
+
+  Future<void> update(String uid, int newValue) async {
+    var sharedPrefs = await SharedPreferences.getInstance();
+
+    await sharedPrefs.setInt(_keyFor(uid), newValue);
+  }
+
+  Future<void> claim(String uid) async {
+    var sharedPrefs = await SharedPreferences.getInstance();
+
+    await sharedPrefs.setBool(_claimedKeyFor(uid), true);
+  }
+
+  Future<void> reset() async {
+    var sharedPrefs = await SharedPreferences.getInstance();
+
+    _achievements.forEach((e) {
+      sharedPrefs.remove(_keyFor(e.uid));
+    });
   }
 }
