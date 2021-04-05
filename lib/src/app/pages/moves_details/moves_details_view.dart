@@ -76,6 +76,9 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
                             ),
                             onPressed: () {
                               move.isLiked = !move.isLiked;
+                              if (move.isLiked) {
+                                this.widget.achievementsObserver.update(AchievementTypes.numberOfLikes);
+                              }
                               setState(() {});
                               likedMovesGateway.setLikedMove(
                                   move, move.isLiked);
@@ -103,7 +106,7 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
       child: InkWell(
           child: InkWell(
               child: Stack(alignment: Alignment.center, children: [
-                Image.asset(CustomImages.placeholder1),
+                Image.network(move.thumbnailUrlString),//Image.asset(CustomImages.placeholder1),
                 Image.asset(CustomImages.play),
               ]),
               onTap: () { launch(move.urlString); this.widget.achievementsObserver.update(AchievementTypes.videoLearner); }

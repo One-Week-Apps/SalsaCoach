@@ -3,13 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:salsa_coach/src/domain/entities/performance.dart';
 import 'package:salsa_coach/src/domain/entities/performance_score.dart';
 import 'package:salsa_coach/src/domain/entities/score_types.dart';
+import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
 import './home_presenter.dart';
 import '../../../domain/entities/user.dart';
+
+import 'package:salsa_coach/main.dart';
 
 class HomeController extends Controller {
   int _counter;
@@ -195,6 +199,33 @@ class HomeController extends Controller {
                 RaisedButton(
                   color: Colors.blue,
                   onPressed: () {
+                    AchievementsObserver achievementsObserver = CommonDeps().achievementsObserver;
+
+                    achievementsObserver.update(AchievementTypes.consecutiveDaysDancing);
+                    
+                    var difficulties = _moves.map((e) => e.difficulty).toList();
+                    var oneStarCount = difficulties.where((element) => element == 1).toList().length;
+                    var twoStarCount = difficulties.where((element) => element == 2).toList().length;
+                    var threeStarCount = difficulties.where((element) => element == 3).toList().length;
+                    var fourStarCount = difficulties.where((element) => element == 4).toList().length;
+                    var fiveStarCount = difficulties.where((element) => element == 5).toList().length;
+                    
+                    for (int i = 0; i < oneStarCount; i++) {
+                      achievementsObserver.update(AchievementTypes.difficulty1);
+                    }
+                    for (int i = 0; i < twoStarCount; i++) {
+                      achievementsObserver.update(AchievementTypes.difficulty2);
+                    }
+                    for (int i = 0; i < threeStarCount; i++) {
+                      achievementsObserver.update(AchievementTypes.difficulty3);
+                    }
+                    for (int i = 0; i < fourStarCount; i++) {
+                      achievementsObserver.update(AchievementTypes.difficulty4);
+                    }
+                    for (int i = 0; i < fiveStarCount; i++) {
+                      achievementsObserver.update(AchievementTypes.difficulty5);
+                    }
+
                     this.ratePerformanceValidated();
                     Navigator.of(context).pop();
                   },

@@ -9,11 +9,25 @@ import 'package:salsa_coach/src/app/pages/moves_listing/moves_listing_view.dart'
 import 'package:salsa_coach/src/app/pages/onboarding/onboarding_view.dart';
 import 'package:salsa_coach/src/app/pages/stats/stats_view.dart';
 import 'package:salsa_coach/src/data/repositories/in_memory_performance_repository.dart';
+import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
+class CommonDeps {
+  static final CommonDeps _singleton = CommonDeps._internal();
+
+  AchievementsObserver achievementsObserver;
+
+  factory CommonDeps() {
+    return _singleton;
+  }
+
+  CommonDeps._internal();
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   var _sharedPref = SharedPref();
   bool tutorialCompleted;
   try {
@@ -21,14 +35,33 @@ Future<void> main() async {
   } catch (e) {
     tutorialCompleted = false;
   }
-  runApp(MyApp(tutorialCompleted));
+
+  String lastDateTimeAppOpened;
+  try {
+    lastDateTimeAppOpened = await _sharedPref.read(SharedPreferencesKeys.lastDateTimeAppOpened);
+  } catch (e) {
+    lastDateTimeAppOpened = DateTime.utc(1970, 01, 01).toIso8601String();
+  }
+
+  final now = DateTime.now();
+  final yesterday = DateTime(now.year, now.month, now.day - 1);
+
+  final dateToCheck = DateTime.parse(lastDateTimeAppOpened).toLocal();
+  final aDate = DateTime(dateToCheck.year, dateToCheck.month, dateToCheck.day);
+  bool isFirstOpeningOfTheDay = aDate == yesterday;
+
+  lastDateTimeAppOpened = now.toUtc().toIso8601String();
+  await _sharedPref.save(SharedPreferencesKeys.lastDateTimeAppOpened, lastDateTimeAppOpened);
+
+  runApp(MyApp(tutorialCompleted, isFirstOpeningOfTheDay));
 }
 
 const PrimaryColor = const Color(0xFFFFFFFF);
 
 class MyApp extends StatelessWidget {
-  MyApp(this.tutorialCompleted);
+  MyApp(this.tutorialCompleted, this.isFirstOpeningOfTheDay);
   final bool tutorialCompleted;
+  final bool isFirstOpeningOfTheDay;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +71,12 @@ class MyApp extends StatelessWidget {
     ]);
 
     AchievementsObserver achievementsObserver = AchievementsController();
+    CommonDeps().achievementsObserver = achievementsObserver;
+
+    if (isFirstOpeningOfTheDay) {
+        achievementsObserver.update(AchievementTypes.consecutiveDaysAppOpening);
+    }
+    
     var homeRoute = tutorialCompleted ? MovesListingRoute(achievementsObserver) : OnboardingRoute();
 
     return OKToast(
@@ -54,7 +93,12 @@ class MyApp extends StatelessWidget {
             final Move move = ModalRoute.of(context).settings.arguments; 
             return MovesDetailsRoute(achievementsObserver, move); 
           },
-          StatsRoute.routeName: (context) => StatsRoute(achievementsObserver),
+          StatsRoute.routeName: (context) {
+            if (isFirstOpeningOfTheDay) {
+              achievementsObserver.update(AchievementTypes.analyst);
+            }
+            return StatsRoute(achievementsObserver);
+          },
         },
         debugShowCheckedModeBanner: false,
       ),

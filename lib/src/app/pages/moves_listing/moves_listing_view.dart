@@ -47,18 +47,20 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   Widget _moveTableViewCell(int index, Move item) {
     var move = controller.moves[index];
     print("move[${index.toString()}] = $move");
+    var thumbnailWidth = MediaQuery.of(context).size.width - 100;
+    var thumbnail = Image.network(move.thumbnailUrlString, width: thumbnailWidth, height: thumbnailWidth * 360 / 480);
 
     return InkWell(
                 child: Container(
                   width: 356,
-                  height: 377,
+                  height: 500,
                   color: Colors.white,
                   child: Column(
                     children: <Widget>[
-                      Image.asset(CustomImages.placeholder1),
+                      thumbnail,//Image.asset(CustomImages.placeholder1),
                       Row(
                         children: <Widget>[
-                          Text(move.name,
+                          Text('\n' + move.name,
                               style: GoogleFonts.montserrat(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w900)),
@@ -82,7 +84,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          move.description.substring(0, min(200, move.description.length - 1)) + "..."))
+                          move.description.substring(0, min(200, move.description.length - 1)) + "...\n"))
                     ],
                   ),
                 ),
