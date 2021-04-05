@@ -1,9 +1,9 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
-import 'package:salsa_memo/src/data/repositories/random_moves_generator.dart';
-import 'package:salsa_memo/src/domain/entities/performance.dart';
-import 'package:salsa_memo/src/domain/usecases/get_performances_usecase.dart';
-import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
+import 'package:salsa_coach/src/data/repositories/in_memory_performance_repository.dart';
+import 'package:salsa_coach/src/data/repositories/random_moves_generator.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/usecases/get_performances_usecase.dart';
+import 'package:salsa_coach/src/domain/usecases/rate_performance_usecase.dart';
 
 import '../../../domain/usecases/get_all_moves_usecase.dart';
 import '../../../domain/usecases/get_user_usecase.dart';

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:salsa_memo/src/app/CustomImages.dart';
-
+import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/data/repositories/in_memory_performance_repository.dart';
+import '../../SharedPreferencesKeys.dart';
 import '../moves_listing/moves_listing_view.dart';
 
 class OnboardingRoute extends StatelessWidget {
@@ -16,7 +17,7 @@ class OnboardingRoute extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Salsa Memo', style: GoogleFonts.salsa(fontSize: 30)),
+        title: Text('Salsa Coach', style: GoogleFonts.salsa(fontSize: 30)),
         // style: TextStyle(
         //   fontFamily: CustomFonts.salsaRegular,
         //   color: Colors.white
@@ -100,11 +101,25 @@ class OnboardingRoute extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Spacer(flex: 1),
+                Text('If you have a WearOS compatible smartwatch, you can download our companion app: Salsa Coach.\n This will allow you to get inspiration for your dance moves using smartwatch vibrations !', textAlign: TextAlign.center, style: style,),
+                Spacer(flex: 1),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[Image.asset(CustomImages.watch1, height: 150,), Image.asset(CustomImages.watch2, height: 150,)]),
+                Spacer(flex: 1),
+                goToNextAnimationView,
+                Spacer(flex: 1),
+              ]),
+
+              Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Spacer(flex: 1),
                 Text('Well done, you have \ncompleted this tutorial!', textAlign: TextAlign.center, style: style,),
                 Spacer(flex: 1),
                 RaisedButton(
                   child: Text('Lets go!'),
-                  onPressed: () {
+                  onPressed: () async {
+                    var _sharedPref = SharedPref();
+                    await _sharedPref.save(SharedPreferencesKeys.tutorialCompleted, true);
                     Navigator.pushReplacementNamed(
                       context, 
                       MovesListingRoute.routeName

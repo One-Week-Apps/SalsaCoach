@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:salsa_memo/src/data/repositories/remote_moves_repository.dart';
+import 'package:salsa_coach/src/data/repositories/remote_moves_repository.dart';
 
 void main() {
 

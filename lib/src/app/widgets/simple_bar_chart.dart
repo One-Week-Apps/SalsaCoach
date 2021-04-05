@@ -3,7 +3,12 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:salsa_memo/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
+
+enum StatsType {
+  danceCount,
+  starsCount
+}
 
 class SimpleBarChart extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -20,10 +25,11 @@ class SimpleBarChart extends StatelessWidget {
     );
   }
 
-  factory SimpleBarChart.withPerformances(List<Performance> performances) {
+  factory SimpleBarChart.withPerformances(StatsType type, DateTime currentDateTime, List<Performance> performances) {
     return new SimpleBarChart(
-      _createPerformancesData(performances),
-      animate: true,
+      _createPerformancesData(type, currentDateTime, performances),
+      // Turning to true shows nothing on Simulator
+      animate: false,
     );
   }
 
@@ -44,7 +50,7 @@ class SimpleBarChart extends StatelessWidget {
   }
 
   /// Create one series with provided performances data.
-  static List<charts.Series<OrdinalPerformances, String>> _createPerformancesData(List<Performance> performances) {
+  static List<charts.Series<OrdinalPerformances, String>> _createPerformancesData(StatsType type, DateTime currentDateTime, List<Performance> performances) {
 
     var locale = "en_US";
     initializeDateFormatting(locale);
@@ -64,7 +70,7 @@ class SimpleBarChart extends StatelessWidget {
           id: 'Progress',
           colorFn: (_, __) => charts.ColorUtil.fromDartColor(Colors.orange),
           domainFn: (OrdinalPerformances performances, _) => performances.day,
-          measureFn: (OrdinalPerformances performances, _) => performances.performanceCount,
+          measureFn: (OrdinalPerformances performances, _) => performances.count,
           data: data,
         )
       ];
@@ -74,8 +80,8 @@ class SimpleBarChart extends StatelessWidget {
     var weekdaysString = weekDays(locale);
     for (int day = DateTime.monday; day <= DateTime.sunday; day++) {
       var weekdayString = weekdaysString[day - 1].substring(0, 3);
-      var starsNumber = starsNumberFor(day, performances);
-      data.add(new OrdinalPerformances(weekdayString, starsNumber));
+      var count = type == StatsType.danceCount ? danceNumberFor(day, currentDateTime, performances) : starsNumberFor(day, currentDateTime, performances);
+      data.add(new OrdinalPerformances(weekdayString, count));
     }
 
     return [
@@ -83,18 +89,39 @@ class SimpleBarChart extends StatelessWidget {
         id: 'Progress',
         colorFn: (_, __) => charts.ColorUtil.fromDartColor(Colors.orange),
         domainFn: (OrdinalPerformances performances, _) => performances.day,
-        measureFn: (OrdinalPerformances performances, _) => performances.performanceCount,
+        measureFn: (OrdinalPerformances performances, _) => performances.count,
         data: data,
       )
     ];
   }
 
-  static int starsNumberFor(int weekday, List<Performance> performances) {
+  static int danceNumberFor(int weekday, DateTime currentDateTime, List<Performance> performances) {
+    if (weekday < DateTime.monday || weekday > DateTime.sunday) return 0;
+
+    int danceNumber;
+
+    var weekDay = currentDateTime.weekday;
+    var firstDayOfWeek = currentDateTime.subtract(Duration(days: weekDay - 1));
+
+    try {
+      var performancesForDay = performances.where((element) => element.dateTime.weekday == weekday && element.dateTime.isAfter(firstDayOfWeek));
+      danceNumber = performancesForDay.length;
+    } catch (e) {
+      danceNumber = 0;
+    }
+    return danceNumber;
+  }
+
+  static int starsNumberFor(int weekday, DateTime currentDateTime, List<Performance> performances) {
     if (weekday < DateTime.monday || weekday > DateTime.sunday) return 0;
 
     int starsNumber;
+
+    var weekDay = currentDateTime.weekday;
+    var firstDayOfWeek = currentDateTime.subtract(Duration(days: weekDay - 1));
+
     try {
-      var performancesForDay = performances.where((element) => element.dateTime.weekday == weekday);
+      var performancesForDay = performances.where((element) => element.dateTime.weekday == weekday && element.dateTime.isAfter(firstDayOfWeek));
       var performancesForDayTotals = performancesForDay.map((e) => e.score.total);
       starsNumber = performancesForDayTotals.reduce((value, element) => value + element);
     } catch (e) {
@@ -120,7 +147,7 @@ class SimpleBarChart extends StatelessWidget {
         id: 'Progress',
         colorFn: (_, __) => charts.ColorUtil.fromDartColor(Colors.orange),
         domainFn: (OrdinalPerformances performances, _) => performances.day,
-        measureFn: (OrdinalPerformances performances, _) => performances.performanceCount,
+        measureFn: (OrdinalPerformances performances, _) => performances.count,
         data: data,
       )
     ];
@@ -130,7 +157,7 @@ class SimpleBarChart extends StatelessWidget {
 /// Sample ordinal data type.
 class OrdinalPerformances {
   final String day;
-  final int performanceCount;
+  final int count;
 
-  OrdinalPerformances(this.day, this.performanceCount);
+  OrdinalPerformances(this.day, this.count);
 }

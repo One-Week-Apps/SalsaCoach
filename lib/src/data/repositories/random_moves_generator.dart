@@ -1,5 +1,5 @@
-import 'package:salsa_memo/src/domain/entities/move.dart';
-import 'package:salsa_memo/src/domain/repositories/random_generator.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/domain/repositories/random_generator.dart';
 
 class RandomMovesGenerator implements RandomGenerator {
   

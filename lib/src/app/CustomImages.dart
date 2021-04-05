@@ -21,6 +21,7 @@ class CustomImages {
   static const unlocked = _imagesPrefix + "unlocked.png";
   static const achievementViewOuter = _imagesPrefix + "achievements_view_outer.png";
   static const achievementBackground = _imagesPrefix + "achievements_background.png";
+  static const achievementBackgroundUnlocked = _imagesPrefix + "achievements_background_unlocked.png";
 
   static const placeholder1 = _imagesPrefix + "placeholder_1.png";
   static const placeholder2 = _imagesPrefix + "placeholder_2.png";
@@ -29,4 +30,8 @@ class CustomImages {
   static const dislike = _imagesPrefix + "dislike.png";
 
   static const play = _imagesPrefix + "play_button.png";
+
+  static const watch1 = _imagesPrefix + "salsa_coach_watch_1.png";
+  static const watch2 = _imagesPrefix + "salsa_coach_watch_2.png";
+  static const achievementTrophy = _imagesPrefix + "achievement_trophy.png";
 }

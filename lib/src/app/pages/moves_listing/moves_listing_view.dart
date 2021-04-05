@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:math';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:salsa_memo/main.dart';
-import 'package:salsa_memo/src/app/CustomImages.dart';
-import 'package:salsa_memo/src/app/pages/moves_details/moves_details_view.dart';
-import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
-import 'package:salsa_memo/src/domain/usecases/achievements_observer.dart';
+import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/app/pages/moves_details/moves_details_view.dart';
+import 'package:salsa_coach/src/data/repositories/data_moves_repository.dart';
+import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
 import '../../../data/repositories/data_users_repository.dart';
 import '../achievements/achievements_view.dart';
@@ -33,8 +33,12 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
 
   Widget _refreshMovesButton() {
     return FloatingActionButton(
+      heroTag: "refreshMovesButton",
       backgroundColor: Colors.black,
-      onPressed: () => controller.flushMovesButtonPressed(),
+      onPressed: () {
+        this.widget.achievementsObserver.update(AchievementTypes.refresher);
+        controller.flushMovesButtonPressed();
+      },
       tooltip: 'Flush Salsa Moves',
       child: Icon(Icons.refresh),
     );
@@ -78,7 +82,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          move.description))
+                          move.description.substring(0, min(200, move.description.length - 1)) + "..."))
                     ],
                   ),
                 ),
@@ -140,15 +144,14 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   }
 
   Widget _ratePerformanceButton() {
-    return RaisedButton(
-      color: Color(0xFFF7B60E),
-      child: Text(
-        'Done !',
-        style: TextStyle(color: Colors.white),
-      ),
+    return FloatingActionButton(
+      heroTag: "ratePerformanceButton",
+      backgroundColor: Colors.black,
       onPressed: () {
         controller.ratePerformanceButtonPressed(context);
       },
+      tooltip: 'Flush Salsa Moves',
+      child: Icon(Icons.done),
     );
   }
 
@@ -188,7 +191,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
 
   @override
   Widget buildPage() {
-    var goToNextAnimationView = Lottie.asset('assets/animations/Onboarding_Slide_Left_Arrows_Animation.json');
+    //var goToNextAnimationView = Lottie.asset('assets/animations/Onboarding_Slide_Left_Arrows_Animation.json');
 
     if (_doOnce) {
       _doOnce = false;
@@ -202,13 +205,12 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: Container(
-        padding: EdgeInsets.only(top: 100),
-        child: _refreshMovesButton(),
+      floatingActionButton: Container(width: 200, padding: EdgeInsets.only(top: 100),
+        child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[_refreshMovesButton(), SizedBox(width: 5), _ratePerformanceButton()]),
       ),
       appBar: AppBar(
         title: Text(
-          'Salsa Memo',
+          'Salsa Coach',
           style: GoogleFonts.salsa(fontSize: 30),
         ),
         actions: <Widget>[
@@ -408,7 +410,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
 //       ),
 //       appBar: AppBar(
 //         title: Text(
-//           'Salsa Memo',
+//           'Salsa Coach',
 //           style: GoogleFonts.salsa(fontSize: 30),
 //         ),
 //         actions: <Widget>[

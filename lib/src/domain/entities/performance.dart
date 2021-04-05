@@ -1,4 +1,4 @@
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
+import 'package:salsa_coach/src/domain/entities/performance_score.dart';
 
 class Performance {
   int id;

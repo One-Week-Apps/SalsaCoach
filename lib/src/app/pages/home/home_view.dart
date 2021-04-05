@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/app/CustomImages.dart';
-import 'package:salsa_memo/src/app/widgets/simple_bar_chart.dart';
-import 'package:salsa_memo/src/data/repositories/data_moves_repository.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/app/widgets/simple_bar_chart.dart';
+import 'package:salsa_coach/src/data/repositories/data_moves_repository.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import './home_controller.dart';
@@ -194,7 +194,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
             height: 10,
           ),
           Container(
-            child: SimpleBarChart.withPerformances(controller.performances ?? []),
+            child: SimpleBarChart.withPerformances(StatsType.starsCount, DateTime.now(), controller.performances ?? []),
             height: MediaQuery.of(context).size.height / 3.5,
           ),
           SizedBox(

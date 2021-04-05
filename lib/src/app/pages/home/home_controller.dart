@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/app/CustomImages.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
-import 'package:salsa_memo/src/domain/entities/performance.dart';
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
-import 'package:salsa_memo/src/domain/entities/score_types.dart';
+import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/entities/performance_score.dart';
+import 'package:salsa_coach/src/domain/entities/score_types.dart';
 
 import './home_presenter.dart';
 import '../../../domain/entities/user.dart';

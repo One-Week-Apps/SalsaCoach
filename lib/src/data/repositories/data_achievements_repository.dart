@@ -1,5 +1,5 @@
-import 'package:salsa_memo/src/app/SharedPreferencesKeys.dart';
-import 'package:salsa_memo/src/domain/entities/achievement_types.dart';
+import 'package:salsa_coach/src/app/SharedPreferencesKeys.dart';
+import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/entities/achievement.dart';
@@ -41,17 +41,17 @@ class DataAchievementsRepository extends AchievementsRepository {
         "Perform a total of 10 moves with difficulty 2", false, false, 0, 10),
     Achievement("42", AchievementTypes.difficulty2, "Simple dancer!",
         "Perform a total of 15 moves with difficulty 2", false, false, 0, 5),
-    Achievement("50", AchievementTypes.difficulty3, "Intermediate dancer!",
+    Achievement("50", AchievementTypes.difficulty3, "Novice dancer!",
         "Perform a total of 5 moves with difficulty 3", false, false, 0, 5),
-    Achievement("51", AchievementTypes.difficulty3, "Intermediate dancer!",
+    Achievement("51", AchievementTypes.difficulty3, "Novice dancer!",
         "Perform a total of 10 moves with difficulty 3", false, false, 0, 10),
-    Achievement("52", AchievementTypes.difficulty3, "Intermediate dancer!",
+    Achievement("52", AchievementTypes.difficulty3, "Novice dancer!",
         "Perform a total of 15 moves with difficulty 3", false, false, 0, 15),
-    Achievement("60", AchievementTypes.difficulty4, "Advanced dancer!",
+    Achievement("60", AchievementTypes.difficulty4, "Pro dancer!",
         "Perform a total of 5 moves with difficulty 4", false, false, 0, 5),
-    Achievement("61", AchievementTypes.difficulty4, "Advanced dancer!",
+    Achievement("61", AchievementTypes.difficulty4, "Pro dancer!",
         "Perform a total of 10 moves with difficulty 4", false, false, 0, 10),
-    Achievement("62", AchievementTypes.difficulty4, "Advanced dancer!",
+    Achievement("62", AchievementTypes.difficulty4, "Pro dancer!",
         "Perform a total of 15 moves with difficulty 4", false, false, 0, 15),
     Achievement("70", AchievementTypes.difficulty5, "Expert dancer!",
         "Perform a total of 5 moves with difficulty 5", false, false, 0, 5),
@@ -91,17 +91,31 @@ class DataAchievementsRepository extends AchievementsRepository {
     var sharedPrefs = await SharedPreferences.getInstance();
     var updatedAchievements = _achievements;
 
-    updatedAchievements
-        .map((e) => {e.currentStep = sharedPrefs.getInt(_keyFor(e.uid))});
+    for (var i = 0; i < updatedAchievements.length; i++) {
+      var uid = updatedAchievements[i].uid;
+      var currentStep = sharedPrefs.getInt(_keyFor(uid));
+      if (currentStep == null) {
+        currentStep = 0;
+      }
+      var isRewardClaimed = sharedPrefs.getBool(_claimedKeyFor(uid));
+      if (isRewardClaimed == null) {
+        isRewardClaimed = false;
+      }
 
-    updatedAchievements.map((e) =>
-        {e.isRewardClaimed = sharedPrefs.getBool(_claimedKeyFor(e.uid))});
+      updatedAchievements[i].currentStep = currentStep;
+      updatedAchievements[i].isRewardClaimed = isRewardClaimed;
+    }
+
+    print("BLACKOPS2 " + sharedPrefs.getInt("prefs_achievementCurrentStep__90").toString() + " " + updatedAchievements.toString());
 
     return updatedAchievements;
   }
 
   Future<void> update(String uid, int newValue) async {
     var sharedPrefs = await SharedPreferences.getInstance();
+    print("BLACKOPS " + _keyFor(uid) + " " + newValue.toString());
+
+    // Perform change locally to improve lookups
 
     await sharedPrefs.setInt(_keyFor(uid), newValue);
   }
@@ -117,6 +131,7 @@ class DataAchievementsRepository extends AchievementsRepository {
 
     _achievements.forEach((e) {
       sharedPrefs.remove(_keyFor(e.uid));
+      sharedPrefs.remove(_claimedKeyFor(e.uid));
     });
   }
 }

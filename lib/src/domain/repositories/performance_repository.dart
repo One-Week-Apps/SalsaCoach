@@ -1,4 +1,4 @@
-import 'package:salsa_memo/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
 
 abstract class PerformanceRepository {
   Future<bool> add(Performance performance);

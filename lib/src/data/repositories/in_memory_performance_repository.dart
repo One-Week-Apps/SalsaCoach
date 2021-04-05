@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:salsa_memo/src/app/SharedPreferencesKeys.dart';
-import 'package:salsa_memo/src/domain/entities/performance.dart';
-import 'package:salsa_memo/src/domain/repositories/performance_repository.dart';
+import 'package:salsa_coach/src/app/SharedPreferencesKeys.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/repositories/performance_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {

@@ -1,6 +1,6 @@
-import 'package:salsa_memo/src/app/SharedPreferencesKeys.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
-import 'package:salsa_memo/src/domain/repositories/liked_moves_gateway.dart';
+import 'package:salsa_coach/src/app/SharedPreferencesKeys.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/domain/repositories/liked_moves_gateway.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataLikedMovesGateway implements LikedMovesGateway {

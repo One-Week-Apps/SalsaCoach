@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/data/repositories/data_liked_moves_gateway.dart';
-import 'package:salsa_memo/src/domain/repositories/liked_moves_gateway.dart';
-import 'package:salsa_memo/src/domain/repositories/random_generator.dart';
+import 'package:salsa_coach/src/data/repositories/data_liked_moves_gateway.dart';
+import 'package:salsa_coach/src/domain/repositories/liked_moves_gateway.dart';
+import 'package:salsa_coach/src/domain/repositories/random_generator.dart';
 
 import '../entities/move.dart';
 import '../repositories/moves_repository.dart';

@@ -1,4 +1,4 @@
-import 'package:salsa_memo/src/domain/entities/achievement_types.dart';
+import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 
 class Achievement {
   final String uid;
@@ -16,5 +16,5 @@ class Achievement {
 
   @override
   String toString() =>
-      '$uid, $type, $name, $description, $isLocal, $isRewardClaimed, $currentStep, $numberOfStep';
+      '$uid, $name, $currentStep, $numberOfStep';//'$uid, $type, $name, $description, $isLocal, $isRewardClaimed, $currentStep, $numberOfStep';
 }

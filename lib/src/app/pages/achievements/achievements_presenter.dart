@@ -1,5 +1,5 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/domain/usecases/achievements_usecase.dart';
+import 'package:salsa_coach/src/domain/usecases/achievements_usecase.dart';
 
 class AchievementsPresenter extends Presenter {
   Function getAllAchievementsOnNext;
@@ -9,6 +9,7 @@ class AchievementsPresenter extends Presenter {
   AchievementsPresenter() : getAchievementsUseCase = AchievementsUseCase();
 
   void getAllAchievements(AchievementsRequestType type, String id) {
+    print("OK2");
     getAchievementsUseCase.execute(_GetAllAchievementsUseCaseObserver(this),
         AchievementsUseCaseParams(type, id));
   }
@@ -26,14 +27,20 @@ class _GetAllAchievementsUseCaseObserver
   _GetAllAchievementsUseCaseObserver(this.presenter);
 
   @override
-  void onComplete() {}
+  void onComplete() {
+    print("onComplete");
+  }
 
   @override
-  void onError(e) {}
+  void onError(e) {
+    print("onError" + e.toString());
+  }
 
   @override
   void onNext(response) {
+    print("onNext" + response.achievements.toString());
     assert(presenter.getAllAchievementsOnNext != null);
+    print("onNext2");
     presenter.getAllAchievementsOnNext(response.achievements);
   }
 }

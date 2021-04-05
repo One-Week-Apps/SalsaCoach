@@ -1,5 +1,5 @@
-import 'package:salsa_memo/src/domain/entities/move.dart';
-import 'package:salsa_memo/src/domain/repositories/moves_repository.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/domain/repositories/moves_repository.dart';
 
 class InMemoryMovesRepository extends MovesRepository {
   List<Move> moves;

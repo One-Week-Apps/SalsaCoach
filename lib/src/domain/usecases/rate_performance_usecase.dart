@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/domain/entities/performance.dart';
-import 'package:salsa_memo/src/domain/repositories/performance_repository.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/repositories/performance_repository.dart';
 
 class RatePerformanceUseCase extends UseCase<RatePerformanceUseCaseResponse,
     RatePerformanceUseCaseParams> {

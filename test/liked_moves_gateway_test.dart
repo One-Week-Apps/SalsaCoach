@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:salsa_memo/src/data/repositories/data_liked_moves_gateway.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/data/repositories/data_liked_moves_gateway.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

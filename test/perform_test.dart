@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:salsa_memo/src/data/repositories/in_memory_moves_repository.dart';
-import 'package:salsa_memo/src/data/repositories/in_memory_performance_repository.dart';
-import 'package:salsa_memo/src/domain/entities/move.dart';
-import 'package:salsa_memo/src/domain/entities/performance.dart';
-import 'package:salsa_memo/src/domain/entities/performance_score.dart';
-import 'package:salsa_memo/src/domain/repositories/random_generator.dart';
-import 'package:salsa_memo/src/domain/usecases/get_all_moves_usecase.dart';
-import 'package:salsa_memo/src/domain/usecases/get_performances_usecase.dart';
-import 'package:salsa_memo/src/domain/usecases/rate_performance_usecase.dart';
+import 'package:salsa_coach/src/data/repositories/in_memory_moves_repository.dart';
+import 'package:salsa_coach/src/data/repositories/in_memory_performance_repository.dart';
+import 'package:salsa_coach/src/domain/entities/move.dart';
+import 'package:salsa_coach/src/domain/entities/performance.dart';
+import 'package:salsa_coach/src/domain/entities/performance_score.dart';
+import 'package:salsa_coach/src/domain/repositories/random_generator.dart';
+import 'package:salsa_coach/src/domain/usecases/get_all_moves_usecase.dart';
+import 'package:salsa_coach/src/domain/usecases/get_performances_usecase.dart';
+import 'package:salsa_coach/src/domain/usecases/rate_performance_usecase.dart';
 
 class RandomGeneratorMock implements RandomGenerator {
   RandomGeneratorMock(List<Move> value) { 

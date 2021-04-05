@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_memo/src/data/repositories/data_achievements_repository.dart';
-import 'package:salsa_memo/src/domain/entities/achievement.dart';
-import 'package:salsa_memo/src/domain/repositories/achievements_repository.dart';
+import 'package:salsa_coach/src/data/repositories/data_achievements_repository.dart';
+import 'package:salsa_coach/src/domain/entities/achievement.dart';
+import 'package:salsa_coach/src/domain/repositories/achievements_repository.dart';
 
 enum AchievementsRequestType { doFetch, doStep, doClaim, doReset }
 
@@ -30,15 +30,19 @@ class AchievementsUseCase
       AchievementsUseCaseParams params) async {
     final StreamController<AchievementsUseCaseResponse> controller =
         StreamController();
+        
+    print("OKA " + params.type.toString());
     try {
       switch (params.type) {
         case AchievementsRequestType.doFetch:
           break;
         case AchievementsRequestType.doStep:
-          var newValue = fetchedAchievements
+        print("OKA1");
+          var oldValue = fetchedAchievements
                   .firstWhere((element) => element.uid == params.id)
-                  .currentStep +
-              1;
+                  .currentStep;
+          var newValue = oldValue + 1;
+          print("OKB " + newValue.toString());
           DataAchievementsRepository.shared.update(params.id, newValue);
           break;
         case AchievementsRequestType.doClaim:
@@ -53,6 +57,12 @@ class AchievementsUseCase
       // the achievements stream is always rebuilt
       List<Achievement> achievements =
           await DataAchievementsRepository.shared.fetch();
+          print('FETCH OKKKKKKK ' + achievements.toString());
+          achievements =
+          await DataAchievementsRepository.shared.fetch();
+          print('FETCH2 OKKKKKKK ' + achievements.toString());
+
+
       this.fetchedAchievements = achievements;
       controller.add(AchievementsUseCaseResponse(achievements));
       logger.finest('GetAchievementsUseCase successful.');

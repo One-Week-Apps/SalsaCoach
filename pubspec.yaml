@@ -1,5 +1,5 @@
-name: salsa_memo
-description: A Salsa Memo application, plan your favorite moves and rate your own performance!
+name: salsa_coach
+description: A Salsa Coach application, plan your favorite moves and rate your own performance!
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -46,6 +46,8 @@ dependencies:
   flutter_webview_plugin: 0.3.0+2
   webview_flutter: 0.2.0
 
+  oktoast: ^2.3.2
+
 dev_dependencies:
   mockito: ^4.1.1
   flutter_test:
@@ -90,7 +92,11 @@ flutter:
     - assets/images/dislike.png
     - assets/images/achievements_view_outer.png
     - assets/images/achievements_background.png
+    - assets/images/achievements_background_unlocked.png
     - assets/images/play_button.png
+    - assets/images/salsa_coach_watch_1.png
+    - assets/images/salsa_coach_watch_2.png
+    - assets/images/achievement_trophy.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
