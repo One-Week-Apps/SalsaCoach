@@ -1,16 +1,16 @@
-# salsa_memo
+# Salsa Memo
 
-A new Flutter project.
 
-## Getting Started
+[![License: MIT](https://camo.githubusercontent.com/474a2feaf657f12a6d2f1109a07886ba92fe3d31/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6275696c642d70617373696e672d627269676874677265656e2e737667)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 
-This project is a starting point for a Flutter application.
+A sample Flutter app demonstrating the usage of Clean Architecture and Test Driven Development for building inclusive iOS & Android applications ! - https://one-week-apps.com/salsa-coach/
 
-A few resources to get you started if this is your first Flutter project:
+# The App
+Salsa Coach is a Salsa application tailored to help Salsa dancers to remember and master key salsa moves!  
+ 
+• Generate a list of moves to perform to help you insert core moves into your dance
+• Self-rate your performance
+• Earn plenty of achievements to showcase your salsa mastery
+• Track your progress week by week
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
