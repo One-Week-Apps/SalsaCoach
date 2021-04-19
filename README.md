@@ -10,7 +10,10 @@ A sample Flutter app demonstrating the usage of Clean Architecture and Test Driv
 Salsa Coach is a Salsa application tailored to help Salsa dancers to remember and master key salsa moves!  
  
 • Generate a list of moves to perform to help you insert core moves into your dance
+
 • Self-rate your performance
+
 • Earn plenty of achievements to showcase your salsa mastery
+
 • Track your progress week by week
 
