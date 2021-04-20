@@ -111,7 +111,7 @@ class HomeController extends Controller {
 
   @override
   void dispose() {
-    homePresenter.dispose(); // don't forget to dispose of the presenter
+    homePresenter.dispose();
     super.dispose();
   }
 
@@ -145,7 +145,6 @@ class HomeController extends Controller {
       StatefulBuilder(builder: (context, setState) {
         return Row(mainAxisAlignment: MainAxisAlignment.center, children: _starRatingView(scoreType, setState));
       }),
-      //Row(mainAxisAlignment: MainAxisAlignment.center, children: _starRatingView(scoreType)),
     ]);
   }
 

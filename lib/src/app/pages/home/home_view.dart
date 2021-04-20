@@ -30,7 +30,6 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   var _tabs = [
     new Tab(text: 'Perform', icon: new Icon(Icons.music_note)),
     new Tab(text: 'Stats', icon: new Icon(Icons.insert_chart)),
-    // new Tab(text: 'Moves', icon: new Icon(Icons.library_books)),
   ];
 
   var _selectedTabIndex = 0;
@@ -136,7 +135,6 @@ class _HomePageState extends ViewState<HomePage, HomeController>
 
     var children = <Widget>[
       for (var i = 0 ; i < controller.moves.length ; i++) _moveTableViewCell(i, controller.moves[i])
-      // for (var item in controller.moves) _moveTableViewCell(item)
     ];
 
     var table = Container(
@@ -149,8 +147,6 @@ class _HomePageState extends ViewState<HomePage, HomeController>
                 ).toList(),
               ));
 
-    // var table =
-        // Column(mainAxisAlignment: MainAxisAlignment.center, children: children);
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       Text("Moves List", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0)),
       Spacer(flex: 1),
@@ -158,7 +154,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
       Spacer(flex: 1),
       table,
       Spacer(flex: 1),
-    ],);//table;
+    ],);
   }
 
   Widget _achievementsCell(String text, bool isComplete) {
@@ -254,7 +250,6 @@ class _HomePageState extends ViewState<HomePage, HomeController>
           children: [
             _performTab(),
             _statsTab(),
-            // _accountView(),
           ],
         ),
       ),

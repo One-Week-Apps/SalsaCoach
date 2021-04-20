@@ -28,7 +28,7 @@ class AchievementsController extends Controller with AchievementsObserver {
 
   @override
   void dispose() {
-    presenter.dispose(); // don't forget to dispose of the presenter
+    presenter.dispose();
     super.dispose();
   }
 

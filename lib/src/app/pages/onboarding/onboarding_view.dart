@@ -129,10 +129,6 @@ class OnboardingRoute extends StatelessWidget {
             ],
           )
           ),
-
-          
-        //Text('Try to perform those moves in one dance !Then rate your dance style using the validate button below. Followers can still rate their dance style even if not performing these moves.', textAlign: TextAlign.center,),
-        //Text("Animation here..."),
     );
   }
 }

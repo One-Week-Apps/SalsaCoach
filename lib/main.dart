@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
             primaryColor: PrimaryColor,
             primarySwatch: Colors.red,
             fontFamily: 'Montserrat'),
-        home: homeRoute,//HomePage(title: 'Salsa Coach 💃'),
+        home: homeRoute,
         routes: {
           MovesListingRoute.routeName: (context) => MovesListingRoute(achievementsObserver),
           MovesDetailsRoute.routeName: (context) { 
