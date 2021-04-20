@@ -106,17 +106,13 @@ class DataAchievementsRepository extends AchievementsRepository {
       updatedAchievements[i].isRewardClaimed = isRewardClaimed;
     }
 
-    print("BLACKOPS2 " + sharedPrefs.getInt("prefs_achievementCurrentStep__90").toString() + " " + updatedAchievements.toString());
-
     return updatedAchievements;
   }
 
   Future<void> update(String uid, int newValue) async {
     var sharedPrefs = await SharedPreferences.getInstance();
-    print("BLACKOPS " + _keyFor(uid) + " " + newValue.toString());
 
     // Perform change locally to improve lookups
-
     await sharedPrefs.setInt(_keyFor(uid), newValue);
   }
 

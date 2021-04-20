@@ -17,7 +17,6 @@ class Performance {
             json['score'][4],
             json['score'][5],
             json['score'][6]),
-        //PerformanceScore(0, 0, 0, 0, 0, 0, 0),
         dateTime = DateTime.fromMillisecondsSinceEpoch(json['dateTime']);
 
   Map<String, dynamic> toJson() => {

@@ -224,26 +224,6 @@ class _HomePageState extends ViewState<HomePage, HomeController>
     );
   }
 
-  Widget _accountView() {
-    return ListView(
-      children: ListTile.divideTiles(
-        context: context,
-        tiles: [
-          ListTile(
-            leading: Icon(Icons.wb_sunny),
-            title: Text('Sun'),
-          ),
-          ListTile(
-            title: Text('Moon'),
-          ),
-          ListTile(
-            title: Text('Star'),
-          ),
-        ],
-      ).toList(),
-    );
-  }
-
   Widget _floatingActionButtons() {
     if (_selectedTabIndex == 0) {
       return Row(children: <Widget>[

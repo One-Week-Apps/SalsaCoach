@@ -28,7 +28,6 @@ class _StatsRouteState extends ViewState<StatsRoute, HomeController>
 
   Widget _statsTab() {
     controller.getAllPerformances();
-    // setState(() {});
 
     var children = <Widget>[
       SizedBox(
@@ -69,10 +68,6 @@ class _StatsRouteState extends ViewState<StatsRoute, HomeController>
         child: ListView(
           children: children,
         )
-
-        // Column(
-        //   children: children,
-        // ),
         );
   }
 

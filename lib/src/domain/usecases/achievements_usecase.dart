@@ -31,18 +31,15 @@ class AchievementsUseCase
     final StreamController<AchievementsUseCaseResponse> controller =
         StreamController();
         
-    print("OKA " + params.type.toString());
     try {
       switch (params.type) {
         case AchievementsRequestType.doFetch:
           break;
         case AchievementsRequestType.doStep:
-        print("OKA1");
           var oldValue = fetchedAchievements
                   .firstWhere((element) => element.uid == params.id)
                   .currentStep;
           var newValue = oldValue + 1;
-          print("OKB " + newValue.toString());
           DataAchievementsRepository.shared.update(params.id, newValue);
           break;
         case AchievementsRequestType.doClaim:
@@ -57,10 +54,8 @@ class AchievementsUseCase
       // the achievements stream is always rebuilt
       List<Achievement> achievements =
           await DataAchievementsRepository.shared.fetch();
-          print('FETCH OKKKKKKK ' + achievements.toString());
           achievements =
           await DataAchievementsRepository.shared.fetch();
-          print('FETCH2 OKKKKKKK ' + achievements.toString());
 
 
       this.fetchedAchievements = achievements;
@@ -69,7 +64,6 @@ class AchievementsUseCase
       controller.close();
     } catch (e) {
       logger.severe('GetAchievementsUseCase unsuccessful.');
-      // Trigger .onError
       controller.addError(e);
     }
     return controller.stream;

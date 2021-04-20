@@ -10,7 +10,7 @@ class DataUsersRepository extends UsersRepository {
   static DataUsersRepository _instance = DataUsersRepository._internal();
 
   DataUsersRepository._internal() {
-    users = List<User>();
+    users = <User>[];
   }
   factory DataUsersRepository() => _instance;
 

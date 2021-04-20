@@ -28,7 +28,6 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
     var likedMovesGateway = DataLikedMovesGateway();
     var move = this.widget.move;
 
-    print("MOVE = " + move.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,19 +41,12 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
                         height: MediaQuery.of(context).size.height + 50,
                         child: Column(children: <Widget>[
             Container(
-      // alignment: Alignment.topCenter,
       child: Container(
           padding: EdgeInsets.only(top: 40),
           width: MediaQuery.of(context).size.width,
-          // height: 377,
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              // InkWell(child: Stack(alignment: Alignment.center, children: [
-              //   Image.asset(CustomImages.placeholder1),
-              //   Image.asset(CustomImages.play),
-              // ]), onTap: () => launch("https://www.youtube.com/embed/AqnNTeRs2Pw")),
-
               Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
                   child: Column(children: <Widget>[
@@ -106,7 +98,7 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
       child: InkWell(
           child: InkWell(
               child: Stack(alignment: Alignment.center, children: [
-                Image.network(move.thumbnailUrlString),//Image.asset(CustomImages.placeholder1),
+                Image.network(move.thumbnailUrlString),
                 Image.asset(CustomImages.play),
               ]),
               onTap: () { launch(move.urlString); this.widget.achievementsObserver.update(AchievementTypes.videoLearner); }
@@ -122,86 +114,3 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
     );
   }
 }
-
-// class MovesDetailsRoute extends StatelessWidget {
-//   final Move move;
-//   MovesDetailsRoute(this.move);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     print("MOVE = " + move.toString());
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           'Move Details',
-//           style: GoogleFonts.salsa(fontSize: 30),
-//         ),
-//       ),
-//       body: Column(children: <Widget>[Container(
-//         // alignment: Alignment.topCenter,
-//         child: Container(
-//           padding: EdgeInsets.only(top: 40),
-//                   width: MediaQuery.of(context).size.width,
-//                   //height: 377,
-//                   color: Colors.white,
-//                   child: Column(
-//                     children:
-//                     <Widget>[
-//                       // InkWell(child: Stack(alignment: Alignment.center, children: [
-//                       //   Image.asset(CustomImages.placeholder1),
-//                       //   Image.asset(CustomImages.play),
-//                       // ]), onTap: () => launch("https://www.youtube.com/embed/AqnNTeRs2Pw")),
-
-//                       Padding(padding: EdgeInsets.only(left: 10, right: 10), child:
-//                       Column(children: <Widget>[
-// Row(
-//                         children: <Widget>[
-//                           Text(move.name,
-//                               style: GoogleFonts.montserrat(
-//                                   fontSize: 20,
-//                                   fontWeight: FontWeight.w900)),
-//                           Spacer(
-//                             flex: 1,
-//                           ),
-//                           IconButton(icon: Image.asset(
-//                             move.isLiked ? CustomImages.like : CustomImages.dislike,
-//                             width: 20,
-//                             height: 20,
-//                           ), onPressed: () {
-//                             print("Liked ${!move.isLiked ? "off" : "on"}!");
-//                             move.isLiked = !move.isLiked;
-//                             // DataLikedMovesGateway().setLikedMove(move, move.isLiked);
-//                           })
-//                           // Image.asset(
-//                           //   move.isLiked ? CustomImages.like : CustomImages.dislike,
-//                           //   width: 20,
-//                           //   height: 20,
-//                           // )
-//                         ],
-//                       ),
-//                       Container(
-//                           alignment: Alignment.centerLeft,
-//                           child: Text(
-//                             "Difficulty: ${move.difficulty} over 5",
-//                             textAlign: TextAlign.left,
-//                           )),
-//                       Text(" "),
-//                       Text(
-//                           move.description
-//                       ),
-//                       ])
-
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//               ), Spacer(flex: 10,), Container(
-//                 alignment: Alignment.bottomCenter,
-//                 child: InkWell(child: InkWell(child: Stack(alignment: Alignment.center, children: [
-//                         Image.asset(CustomImages.placeholder1),
-//                         Image.asset(CustomImages.play),
-//                       ]), onTap: () => launch(move.urlString)),),
-//               ), Spacer(flex: 1,),]),
-//     );
-//   }
-// }

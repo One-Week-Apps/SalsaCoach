@@ -16,5 +16,5 @@ class Achievement {
 
   @override
   String toString() =>
-      '$uid, $name, $currentStep, $numberOfStep';//'$uid, $type, $name, $description, $isLocal, $isRewardClaimed, $currentStep, $numberOfStep';
+      '$uid, $name, $currentStep, $numberOfStep';
 }

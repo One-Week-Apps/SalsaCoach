@@ -49,8 +49,7 @@ class HomeController extends Controller {
     // On error, show a snackbar, remove the user, and refresh the UI
     homePresenter.getUserOnError = (e) {
       print('Could not retrieve user.');
-      ScaffoldState state = getState();
-      state.showSnackBar(SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(getContext()).showSnackBar(SnackBar(content: Text(e.message)));
       _user = null;
       refreshUI(); // Refreshes the UI manually
     };
@@ -81,7 +80,6 @@ class HomeController extends Controller {
   void flushMovesButtonPressed() {
     print("flushMovesButtonPressed");
     homePresenter.getAllMoves();
-    //refreshUI();
   }
 
   void ratePerformanceButtonPressed(BuildContext context) {

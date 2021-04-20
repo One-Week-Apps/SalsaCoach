@@ -18,10 +18,6 @@ class OnboardingRoute extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Salsa Coach', style: GoogleFonts.salsa(fontSize: 30)),
-        // style: TextStyle(
-        //   fontFamily: CustomFonts.salsaRegular,
-        //   color: Colors.white
-        // ),),
       ),
       body: Center(
         child:

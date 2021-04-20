@@ -18,7 +18,6 @@ class AchievementsController extends Controller with AchievementsObserver {
   @override
   void initListeners() {
     presenter.getAllAchievementsOnNext = (List<Achievement> achievements) {
-      print("AAAAAAAAA" + achievements.toString());
       _achievements = achievements;
       refreshUI();
     };
@@ -38,8 +37,6 @@ class AchievementsController extends Controller with AchievementsObserver {
     print("update for " + type.toString());
 
     //ensure all achievements have been fetched
-    //print("OK1");
-    //executeAchievements(AchievementsRequestType.doFetch, null);
     if (presenter.getAchievementsUseCase.fetchedAchievements == null) {
       executeAchievements(AchievementsRequestType.doFetch, null);
     }
@@ -57,19 +54,11 @@ class AchievementsController extends Controller with AchievementsObserver {
 
             if (!didShowToast) {
               didShowToast = true;
-
-              //final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-              //showToastWidget(Text("" + presenter.getAchievementsUseCase.fetchedAchievements[i].name + ": " + presenter.getAchievementsUseCase.fetchedAchievements[i].currentStep.toString() + "/" + presenter.getAchievementsUseCase.fetchedAchievements[i].numberOfStep.toString() + " ✅"));
               showToast("" + presenter.getAchievementsUseCase.fetchedAchievements[i].name + ": " + (presenter.getAchievementsUseCase.fetchedAchievements[i].currentStep + 1).toString() + "/" + presenter.getAchievementsUseCase.fetchedAchievements[i].numberOfStep.toString() + " ✅");
-              /*Scaffold.of(AppConstants.appContext).showSnackBar(SnackBar( //_key.currentState.showSnackBar(SnackBar(
-                content: Text("" + presenter.getAchievementsUseCase.fetchedAchievements[i].name + ": " + presenter.getAchievementsUseCase.fetchedAchievements[i].currentStep.toString() + "/" + presenter.getAchievementsUseCase.fetchedAchievements[i].numberOfStep.toString() + " ✅"),
-              ));*/
             }
 
             executeAchievements(AchievementsRequestType.doStep, presenter.getAchievementsUseCase.fetchedAchievements[i].uid);
         }
     }
-
-    //executeAchievements(AchievementsRequestType.doFetch, null);
   }
 }
