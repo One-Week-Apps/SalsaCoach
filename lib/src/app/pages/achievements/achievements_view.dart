@@ -96,6 +96,7 @@ class _AchievementsRouteState
                         achievement.isRewardClaimed)
                     ? null
                     : () {
+                        var controller = FlutterCleanArchitecture.getController<AchievementsController>(context);
                         controller.executeAchievements(
                             AchievementsRequestType.doClaim, achievement.uid);
                         showToastWidget(Image.asset(CustomImages.achievementTrophy));
@@ -171,7 +172,12 @@ class _AchievementsRouteState
   }
 
   @override
+  Widget get view => buildPage();
+
   Widget buildPage() {
+    AchievementsController controller =
+        FlutterCleanArchitecture.getController<AchievementsController>(context);
+
     if (doOnce) {
       doOnce = false;
       controller.executeAchievements(AchievementsRequestType.doFetch, null);

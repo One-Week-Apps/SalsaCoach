@@ -41,6 +41,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   }
 
   Widget _menu() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return Container(
       height: 100.0,
       color: Colors.red,
@@ -61,6 +62,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   }
 
   Widget _refreshMovesButton() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return FloatingActionButton(
       onPressed: () => controller.flushMovesButtonPressed(),
       tooltip: 'Flush Salsa Moves',
@@ -69,6 +71,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   }
 
   Widget _ratePerformanceButton() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return FloatingActionButton(
       onPressed: () => controller.ratePerformanceButtonPressed(context,),
       tooltip: 'Rate Performance',
@@ -79,6 +82,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   var _doOnce = true;
 
   Widget _moveTableViewCell(int index, Move item) {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return Row(children: <Widget>[
       new Image.asset(
         CustomImages.logo,
@@ -128,6 +132,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   }
 
   Widget _performTab() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     if (_doOnce) {
       _doOnce = false;
       controller.getAllMoves();
@@ -178,6 +183,7 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   }
 
   Widget _statsTab() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
       child: Column(
@@ -238,6 +244,8 @@ class _HomePageState extends ViewState<HomePage, HomeController>
   }
 
   @override
+  Widget get view => buildPage();
+
   Widget buildPage() {
     return DefaultTabController(
       length: _tabs.length,

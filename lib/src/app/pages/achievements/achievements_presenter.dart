@@ -9,7 +9,6 @@ class AchievementsPresenter extends Presenter {
   AchievementsPresenter() : getAchievementsUseCase = AchievementsUseCase();
 
   void getAllAchievements(AchievementsRequestType type, String id) {
-    print("OK2");
     getAchievementsUseCase.execute(_GetAllAchievementsUseCaseObserver(this),
         AchievementsUseCaseParams(type, id));
   }
@@ -40,7 +39,6 @@ class _GetAllAchievementsUseCaseObserver
   void onNext(response) {
     print("onNext" + response.achievements.toString());
     assert(presenter.getAllAchievementsOnNext != null);
-    print("onNext2");
     presenter.getAllAchievementsOnNext(response.achievements);
   }
 }

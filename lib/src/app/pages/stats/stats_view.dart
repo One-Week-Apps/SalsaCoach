@@ -27,6 +27,7 @@ class _StatsRouteState extends ViewState<StatsRoute, HomeController>
       : super(HomeController(DataUsersRepository(), DataMovesRepository()));
 
   Widget _statsTab() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     controller.getAllPerformances();
 
     var children = <Widget>[
@@ -72,6 +73,8 @@ class _StatsRouteState extends ViewState<StatsRoute, HomeController>
   }
 
   @override
+  Widget get view => buildPage();
+
   Widget buildPage() {
     return Scaffold(
       appBar: AppBar(

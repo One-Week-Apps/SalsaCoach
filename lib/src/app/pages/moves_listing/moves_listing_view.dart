@@ -32,6 +32,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
       : super(HomeController(DataUsersRepository(), DataMovesRepository()));
 
   Widget _refreshMovesButton() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return FloatingActionButton(
       heroTag: "refreshMovesButton",
       backgroundColor: Colors.black,
@@ -45,6 +46,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   }
 
   Widget _moveTableViewCell(int index, Move item) {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     var move = controller.moves[index];
     print("move[${index.toString()}] = $move");
     var thumbnailWidth = MediaQuery.of(context).size.width - 100;
@@ -99,6 +101,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   }
 
   Widget _ratePerformanceButton() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
     return FloatingActionButton(
       heroTag: "ratePerformanceButton",
       backgroundColor: Colors.black,
@@ -112,7 +115,10 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
 
   var _doOnce = true;
   @override
+  Widget get view => buildPage();
+
   Widget buildPage() {
+    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
 
     if (_doOnce) {
       _doOnce = false;

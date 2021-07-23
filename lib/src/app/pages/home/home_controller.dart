@@ -110,9 +110,9 @@ class HomeController extends Controller {
   }
 
   @override
-  void dispose() {
+  void onDisposed() {
     homePresenter.dispose();
-    super.dispose();
+    super.onDisposed();
   }
 
   static var _ratingsKeys = ScoreTypes.values;

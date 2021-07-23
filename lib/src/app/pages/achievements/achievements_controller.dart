@@ -27,9 +27,9 @@ class AchievementsController extends Controller with AchievementsObserver {
       presenter.getAllAchievements(type, id);
 
   @override
-  void dispose() {
+  void onDisposed() {
     presenter.dispose();
-    super.dispose();
+    super.onDisposed();
   }
 
   @override
@@ -49,8 +49,6 @@ class AchievementsController extends Controller with AchievementsObserver {
         {
             if (presenter.getAchievementsUseCase.fetchedAchievements[i].currentStep >= presenter.getAchievementsUseCase.fetchedAchievements[i].numberOfStep)
               continue;
-
-            print("FOUND " + presenter.getAchievementsUseCase.fetchedAchievements[i].name + presenter.getAchievementsUseCase.fetchedAchievements[i].currentStep.toString());
 
             if (!didShowToast) {
               didShowToast = true;
