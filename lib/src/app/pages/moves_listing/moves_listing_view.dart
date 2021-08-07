@@ -11,7 +11,6 @@ import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
-import '../../../data/repositories/data_users_repository.dart';
 import '../achievements/achievements_view.dart';
 import '../home/home_controller.dart';
 
@@ -29,7 +28,7 @@ class MovesListingRoute extends View {
 class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeController>
     with SingleTickerProviderStateMixin {
     _MovesListingRouteState()
-      : super(HomeController(DataUsersRepository(), DataMovesRepository()));
+      : super(HomeController(DataMovesRepository()));
 
   Widget _refreshMovesButton() {
     var controller = FlutterCleanArchitecture.getController<HomeController>(context);

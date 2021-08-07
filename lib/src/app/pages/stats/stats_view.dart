@@ -24,7 +24,7 @@ class StatsRoute extends View {
 class _StatsRouteState extends ViewState<StatsRoute, HomeController>
     with SingleTickerProviderStateMixin {
   _StatsRouteState()
-      : super(HomeController(DataUsersRepository(), DataMovesRepository()));
+      : super(HomeController(DataMovesRepository()));
 
   Widget _statsTab() {
     var controller = FlutterCleanArchitecture.getController<HomeController>(context);

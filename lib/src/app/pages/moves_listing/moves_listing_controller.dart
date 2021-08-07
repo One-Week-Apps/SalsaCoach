@@ -10,76 +10,54 @@ import 'package:salsa_coach/src/domain/entities/performance_score.dart';
 import 'package:salsa_coach/src/domain/entities/score_types.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
-import './home_presenter.dart';
-import '../../../domain/entities/user.dart';
+import 'moves_listing_presenter.dart';
 
 import 'package:salsa_coach/main.dart';
 
-class HomeController extends Controller {
+class MovesListingController extends Controller {
   int _counter;
-  User _user;
   List<Move> _moves;
   List<Performance> _performances;
   
   // data used by the View
   int get counter => _counter;
-  User get user => _user;
   List<Move> get moves => _moves;
   List<Performance> get performances => _performances;
   
-  final HomePresenter homePresenter;
+  final MovesListingPresenter movesListingPresenter;
   // Presenter should always be initialized this way
-  HomeController(usersRepo, movesRepo)
+  MovesListingController(movesRepo)
       : _counter = 0,
-        homePresenter = HomePresenter(usersRepo, movesRepo),
+        movesListingPresenter = MovesListingPresenter(movesRepo),
         super();
 
   @override
   // this is called automatically by the parent class
   void initListeners() {
-    homePresenter.getUserOnNext = (User user) {
-      print(user.toString());
-      _user = user;
-      refreshUI(); // Refreshes the UI manually
-    };
-    homePresenter.getUserOnComplete = () {
-      print('User retrieved');
-    };
 
-    // On error, show a snackbar, remove the user, and refresh the UI
-    homePresenter.getUserOnError = (e) {
-      print('Could not retrieve user.');
-      ScaffoldMessenger.of(getContext()).showSnackBar(SnackBar(content: Text(e.message)));
-      _user = null;
-      refreshUI(); // Refreshes the UI manually
-    };
-
-    homePresenter.getAllMovesOnNext = (List<Move> moves) {
+    movesListingPresenter.getAllMovesOnNext = (List<Move> moves) {
       print(moves.toString());
       _moves = moves;
       refreshUI();
     };
 
-    homePresenter.addPerformanceOnNext = () {
+    movesListingPresenter.addPerformanceOnNext = () {
       print('Performance added!');
     };
 
-    homePresenter.getPerformancesOnNext = (List<Performance> perfs) {
+    movesListingPresenter.getPerformancesOnNext = (List<Performance> perfs) {
       print(perfs.toString());
       _performances = perfs;
       refreshUI();
     };
   }
 
-  void getUser() => homePresenter.getUser('test-uid');
-  void getUserwithError() => homePresenter.getUser('test-uid231243');
-
-  void getAllMoves() => homePresenter.getAllMoves();
-  void getAllPerformances() => homePresenter.getAllPerformances();
+  void getAllMoves() => movesListingPresenter.getAllMoves();
+  void getAllPerformances() => movesListingPresenter.getAllPerformances();
 
   void flushMovesButtonPressed() {
     print("flushMovesButtonPressed");
-    homePresenter.getAllMoves();
+    movesListingPresenter.getAllMoves();
   }
 
   void ratePerformanceButtonPressed(BuildContext context) {
@@ -99,7 +77,7 @@ class HomeController extends Controller {
       _ratings[ScoreTypes.handToss],
     );
     var perf = Performance(DateTime.now().millisecondsSinceEpoch, perfScore, DateTime.now());
-    homePresenter.addPerformance(perf);
+    movesListingPresenter.addPerformance(perf);
     refreshUI();
   }
 
@@ -111,7 +89,7 @@ class HomeController extends Controller {
 
   @override
   void onDisposed() {
-    homePresenter.dispose();
+    movesListingPresenter.dispose();
     super.onDisposed();
   }
 
