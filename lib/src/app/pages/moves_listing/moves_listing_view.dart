@@ -12,7 +12,7 @@ import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
 import '../achievements/achievements_view.dart';
-import '../home/home_controller.dart';
+import 'moves_listing_controller.dart';
 
 class MovesListingRoute extends View {
   static const routeName = '/movesListing';
@@ -25,13 +25,13 @@ class MovesListingRoute extends View {
   _MovesListingRouteState createState() => _MovesListingRouteState();
 }
 
-class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeController>
+class _MovesListingRouteState extends ViewState<MovesListingRoute, MovesListingController>
     with SingleTickerProviderStateMixin {
     _MovesListingRouteState()
-      : super(HomeController(DataMovesRepository()));
+      : super(MovesListingController(DataMovesRepository()));
 
   Widget _refreshMovesButton() {
-    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
+    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     return FloatingActionButton(
       heroTag: "refreshMovesButton",
       backgroundColor: Colors.black,
@@ -45,7 +45,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   }
 
   Widget _moveTableViewCell(int index, Move item) {
-    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
+    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     var move = controller.moves[index];
     print("move[${index.toString()}] = $move");
     var thumbnailWidth = MediaQuery.of(context).size.width - 100;
@@ -100,7 +100,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   }
 
   Widget _ratePerformanceButton() {
-    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
+    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     return FloatingActionButton(
       heroTag: "ratePerformanceButton",
       backgroundColor: Colors.black,
@@ -117,7 +117,7 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, HomeControlle
   Widget get view => buildPage();
 
   Widget buildPage() {
-    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
+    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
 
     if (_doOnce) {
       _doOnce = false;

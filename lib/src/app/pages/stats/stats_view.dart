@@ -8,7 +8,7 @@ import 'package:salsa_coach/src/data/repositories/data_moves_repository.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
 import '../../../data/repositories/data_users_repository.dart';
-import '../home/home_controller.dart';
+import '../moves_listing/moves_listing_controller.dart';
 
 class StatsRoute extends View {
   static const routeName = '/stats';
@@ -21,13 +21,13 @@ class StatsRoute extends View {
   _StatsRouteState createState() => _StatsRouteState();
 }
 
-class _StatsRouteState extends ViewState<StatsRoute, HomeController>
+class _StatsRouteState extends ViewState<StatsRoute, MovesListingController>
     with SingleTickerProviderStateMixin {
   _StatsRouteState()
-      : super(HomeController(DataMovesRepository()));
+      : super(MovesListingController(DataMovesRepository()));
 
   Widget _statsTab() {
-    var controller = FlutterCleanArchitecture.getController<HomeController>(context);
+    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     controller.getAllPerformances();
 
     var children = <Widget>[
