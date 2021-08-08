@@ -104,7 +104,8 @@ class MovesListingController extends Controller {
       _ratings[ScoreTypes.locks],
       _ratings[ScoreTypes.handToss],
     );
-    var perf = Performance(DateTime.now().millisecondsSinceEpoch, perfScore, DateTime.now());
+    var datetime = DateTime.now();
+    var perf = Performance(datetime.millisecondsSinceEpoch, perfScore, datetime);
     movesListingPresenter.addPerformance(perf);
     refreshUI();
   }
