@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
 
+  var move = Move('Sombrero', 'Key Times: 4 * 4', 'The Sombrero move', 'https://www.youtube.com/embed/AqnNTeRs2Pw', 1);
+
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
@@ -21,7 +23,7 @@ void main() {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
 
-    var isLiked = await sut.isLikedMove(Move('Sombrero', 'Key Times: 4 * 4', 'The Sombrero move', 'https://www.youtube.com/embed/AqnNTeRs2Pw', 1),);
+    var isLiked = await sut.isLikedMove(move);
 
     expect(isLiked, false);
   });
@@ -29,7 +31,6 @@ void main() {
   test('Liked Move is liked', () async {
     var sut = DataLikedMovesGateway();
   
-    var move = Move('Sombrero', 'Key Times: 4 * 4', 'The Sombrero move', 'https://www.youtube.com/embed/AqnNTeRs2Pw', 1);
     await sut.setLikedMove(move, true);
     var isLiked = await sut.isLikedMove(move);
 
@@ -39,7 +40,6 @@ void main() {
   test('Disliked Move is disliked', () async {
     var sut = DataLikedMovesGateway();
 
-    var move = Move('Sombrero', 'Key Times: 4 * 4', 'The Sombrero move', 'https://www.youtube.com/embed/AqnNTeRs2Pw', 1);
     await sut.setLikedMove(move, false);
     var isLiked = await sut.isLikedMove(move);
 
