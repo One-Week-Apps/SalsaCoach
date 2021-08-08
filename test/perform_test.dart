@@ -34,10 +34,12 @@ void main() {
       Move("El Uno", "", "", "", 2),
       Move("Exhibela", "", "", "", 2)
     ];
+    
+    var movesRepo = InMemoryMovesRepository(moves);
     var randomGenerator = RandomGeneratorMock(expected);
     var count = 2;
 
-    var sut = GetAllMovesUseCase(InMemoryMovesRepository(moves), randomGenerator);
+    var sut = GetAllMovesUseCase(movesRepo, randomGenerator);
 
     var response = await sut.buildUseCaseStream(GetAllMovesUseCaseParams(count));
     response.forEach((element) {
