@@ -5,13 +5,12 @@ class Achievement {
   final AchievementTypes type;
   final String name;
   final String description;
-  final bool isLocal;
 
   bool isRewardClaimed;
   int currentStep;
   int numberOfStep;
 
-  Achievement(this.uid, this.type, this.name, this.description, this.isLocal,
+  Achievement(this.uid, this.type, this.name, this.description,
       this.isRewardClaimed, this.currentStep, this.numberOfStep);
 
   @override
