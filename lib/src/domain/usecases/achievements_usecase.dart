@@ -54,9 +54,6 @@ class AchievementsUseCase
       // the achievements stream is always rebuilt
       List<Achievement> achievements =
           await DataAchievementsRepository.shared.fetch();
-          achievements =
-          await DataAchievementsRepository.shared.fetch();
-
 
       this.fetchedAchievements = achievements;
       controller.add(AchievementsUseCaseResponse(achievements));
