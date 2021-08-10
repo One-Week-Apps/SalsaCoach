@@ -7,7 +7,6 @@ import 'package:salsa_coach/src/app/widgets/simple_bar_chart.dart';
 import 'package:salsa_coach/src/data/repositories/data_moves_repository.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 
-import '../../../data/repositories/data_users_repository.dart';
 import '../moves_listing/moves_listing_controller.dart';
 
 class StatsRoute extends View {
