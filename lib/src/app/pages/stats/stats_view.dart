@@ -61,12 +61,14 @@ class _StatsRouteState extends fcl.ViewState<StatsRoute, MovesListingController>
       ),
     ];
 
-    return Container(
+    return fcl.ControlledWidgetBuilder<MovesListingController>(builder: ((BuildContext context, MovesListingController controller) {
+      return Container(
         margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
         child: ListView(
           children: children,
         )
         );
+    }));
   }
 
   @override

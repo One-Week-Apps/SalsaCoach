@@ -99,10 +99,8 @@ class MovesListingController extends Controller {
       _ratings[ScoreTypes.tempo]!,
       _ratings[ScoreTypes.bodyMovement]!,
       _ratings[ScoreTypes.tracing]!,
-      _ratings[ScoreTypes.hairBrushes]!,
       _ratings[ScoreTypes.blocks]!,
-      _ratings[ScoreTypes.locks]!,
-      _ratings[ScoreTypes.handToss]!,
+      _ratings[ScoreTypes.locks]!
     );
     var datetime = DateTime.now();
     var perf = Performance(datetime.millisecondsSinceEpoch, perfScore, datetime);
@@ -186,13 +184,9 @@ class MovesListingController extends Controller {
             Spacer(flex: 1),
             _ratingBox(ScoreTypes.tracing),
             Spacer(flex: 1),
-            _ratingBox(ScoreTypes.hairBrushes),
-            Spacer(flex: 1),
             _ratingBox(ScoreTypes.blocks),
             Spacer(flex: 1),
             _ratingBox(ScoreTypes.locks),
-            Spacer(flex: 1),
-            _ratingBox(ScoreTypes.handToss),
             Spacer(flex: 2),
 
             // Confirm Button

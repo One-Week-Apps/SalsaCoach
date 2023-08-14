@@ -14,9 +14,7 @@ class Performance {
             json['score'][1],
             json['score'][2],
             json['score'][3],
-            json['score'][4],
-            json['score'][5],
-            json['score'][6]),
+            json['score'][4]),
         dateTime = DateTime.fromMillisecondsSinceEpoch(json['dateTime']);
 
   Map<String, dynamic> toJson() => {
@@ -26,10 +24,8 @@ class Performance {
           score.tempo,
           score.bodyMovement,
           score.tracing,
-          score.hairBrushes,
           score.blocks,
-          score.locks,
-          score.handToss
+          score.locks
         ]
       };
 }

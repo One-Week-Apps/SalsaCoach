@@ -8,7 +8,7 @@ class DataMovesRepository extends MovesRepository {
   DataMovesRepository._internal() {
     moves = <Move>[];
     moves.addAll([
-      Move('Sombrero', 'Key Times: 1 * 8', '''Begins with: From Open Position, Vacilala con la Mano (right hand)
+      Move('Sombrero', 'Key Times: 1 * 8', '''Begins with: Open Position, Vacilala con la Mano (right hand)
 
 Hand holds: Right hand to Right hand, Left hand grabs Right hand, Followers Left arm ends on Leaders Left shoulder keeping the hand holds 
 

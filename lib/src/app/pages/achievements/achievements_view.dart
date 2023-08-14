@@ -201,7 +201,8 @@ class _AchievementsRouteState
       ),
       body: Column(
         children: <Widget>[
-          Expanded(child: Center(
+          fcl.ControlledWidgetBuilder<AchievementsController>(builder: ((BuildContext context, AchievementsController controller) {
+          return Expanded(child: Center(
               child: GridView.count(
             childAspectRatio: MediaQuery.of(context).size.height < 800 ? 1 / 1.7 : 1 / 1.3,
             primary: false,
@@ -213,7 +214,7 @@ class _AchievementsRouteState
               for (var i = 0; i < controller.achievements.length; i++)
                 _cell(i, controller.achievements[i])
             ],
-          )) ),
+          )) );})),
           SizedBox(
             height: 10,
           ),

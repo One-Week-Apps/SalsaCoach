@@ -2,10 +2,8 @@ enum ScoreTypes {
   tempo,
   bodyMovement,
   tracing,
-  hairBrushes,
   blocks,
-  locks,
-  handToss
+  locks
 }
 
 extension ScoreTypesExtension on ScoreTypes {
@@ -13,10 +11,8 @@ extension ScoreTypesExtension on ScoreTypes {
     ScoreTypes.tempo: 'Tempo',
     ScoreTypes.bodyMovement: 'Body Movement',
     ScoreTypes.tracing: 'Tracing',
-    ScoreTypes.hairBrushes: 'Hair Brushes',
     ScoreTypes.blocks: 'Blocks',
     ScoreTypes.locks: 'Locks',
-    ScoreTypes.handToss: 'Hand Toss',
   };
 
   String get rawValue => _names[this] ?? "Generic";

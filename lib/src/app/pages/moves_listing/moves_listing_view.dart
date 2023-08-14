@@ -24,8 +24,7 @@ class MovesListingRoute extends fcl.View {
   }
 }
 
-class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesListingController>
-    with SingleTickerProviderStateMixin {
+class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesListingController> {
 
     MovesListingController controller;
 
@@ -35,6 +34,7 @@ class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesList
   Widget _refreshMovesButton() {
     return FloatingActionButton(
       heroTag: "refreshMovesButton",
+      foregroundColor: Colors.white,
       backgroundColor: Colors.black,
       onPressed: () {
         this.widget.achievementsObserver.update(AchievementTypes.refresher);
@@ -85,7 +85,7 @@ class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesList
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          move.description.substring(0, min(200, move.description.length - 1)) + "...\n"))
+                          move.description, maxLines: 2,))
                     ],
                   ),
                 ),
@@ -102,6 +102,7 @@ class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesList
   Widget _ratePerformanceButton() {
     return FloatingActionButton(
       heroTag: "ratePerformanceButton",
+      foregroundColor: Colors.white,
       backgroundColor: Colors.black,
       onPressed: () {
         controller.ratePerformanceButtonPressed(context);
@@ -122,11 +123,8 @@ class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesList
       controller.getAllMoves();
     }
 
-    var children = <Widget>[
-      for (var i = 0 ; i < controller.moves.length ; i++) _moveTableViewCell(i, controller.moves[i])
-    ];
-
     return Scaffold(
+      key: globalKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: Container(width: 200, padding: EdgeInsets.only(top: 100),
         child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[_refreshMovesButton(), SizedBox(width: 5), _ratePerformanceButton()]),
@@ -150,12 +148,17 @@ class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesList
       ),
       body: Center(
         child:
-            ListView(
+            fcl.ControlledWidgetBuilder<MovesListingController>(builder: ((BuildContext context, MovesListingController controller) {
+              var children = <Widget>[
+                for (var i = 0 ; i < controller.moves.length ; i++) _moveTableViewCell(i, controller.moves[i])
+              ];
+              return ListView(
                 padding: const EdgeInsets.all(8)
                     .add(EdgeInsets.only(top: 100))
                     .add(EdgeInsets.only(bottom: 50)),
                 children: children,
-      ),),
+      );
+  }))),
     );
   }
 
