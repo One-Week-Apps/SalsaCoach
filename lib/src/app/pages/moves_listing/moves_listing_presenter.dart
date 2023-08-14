@@ -8,11 +8,11 @@ import 'package:salsa_coach/src/domain/usecases/rate_performance_usecase.dart';
 import '../../../domain/usecases/get_all_moves_usecase.dart';
 
 class MovesListingPresenter extends Presenter {
-  Function getAllMovesOnNext;
+  late Function getAllMovesOnNext;
 
-  Function addPerformanceOnNext;
+  late Function addPerformanceOnNext;
 
-  Function getPerformancesOnNext;
+  late Function getPerformancesOnNext;
 
   final GetAllMovesUseCase getAllMovesUseCase;
   final RatePerformanceUseCase ratePerformanceUseCase;
@@ -82,8 +82,7 @@ class _GetAllPerformancesUseCaseObserver extends Observer<GetAllPerformancesUseC
 
   @override
   void onNext(response) {
-    assert(presenter.getPerformancesOnNext != null);
-    presenter.getPerformancesOnNext(response.perfs);
+    presenter.getPerformancesOnNext(response!.perfs);
   }
 }
 
@@ -100,6 +99,6 @@ class _GetAllMovesUseCaseObserver extends Observer<GetAllMovesUseCaseResponse> {
 
   @override
   void onNext(response) {
-    presenter.getAllMovesOnNext(response.moves);
+    presenter.getAllMovesOnNext(response!.moves);
   }
 }

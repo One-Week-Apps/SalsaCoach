@@ -18,14 +18,14 @@ class GetAllMovesUseCase
 
   @override
   Future<Stream<GetAllMovesUseCaseResponse>> buildUseCaseStream(
-      GetAllMovesUseCaseParams params) async {
+      GetAllMovesUseCaseParams? params) async {
     final StreamController<GetAllMovesUseCaseResponse> controller =
         StreamController();
     try {
       // get moves
       List<Move> moves = await movesRepository.getAllMoves();
       // filter moves
-      var randomMoves = randomGenerator.rand(moves).sublist(0, params.count);
+      var randomMoves = randomGenerator.rand(moves).sublist(0, params!.count);
       randomMoves.forEach((element) async =>
       element.isLiked = await likedMovesGateway.isLikedMove(element));
       // Adding it triggers the .onNext() in the `Observer`

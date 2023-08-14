@@ -8,21 +8,25 @@ import 'package:salsa_coach/src/domain/repositories/random_generator.dart';
 import 'package:salsa_coach/src/domain/usecases/get_all_moves_usecase.dart';
 import 'package:salsa_coach/src/domain/usecases/get_performances_usecase.dart';
 import 'package:salsa_coach/src/domain/usecases/rate_performance_usecase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RandomGeneratorMock implements RandomGenerator {
-  RandomGeneratorMock(List<Move> value) { 
-    this.value = value;
-  }
+  RandomGeneratorMock(this.value);
   List<Move> value;
   
   @override
   List<Move> rand(List<Move> moves) {
     return this.value;
   }
-
 }
 
 void main() {
+
+  setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+  });
+  
   test('Staged moves randomly chosed', () async {
     var moves = [
       Move("Sombrero", "", "", "", 1), 

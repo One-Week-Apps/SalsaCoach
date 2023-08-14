@@ -12,7 +12,7 @@ class GetPerformancesUseCase extends UseCase<GetAllPerformancesUseCaseResponse,
 
   @override
   Future<Stream<GetAllPerformancesUseCaseResponse>> buildUseCaseStream(
-      GetAllPerformancesUseCaseParams params) async {
+      GetAllPerformancesUseCaseParams? params) async {
     final StreamController<GetAllPerformancesUseCaseResponse> controller =
         StreamController();
     try {

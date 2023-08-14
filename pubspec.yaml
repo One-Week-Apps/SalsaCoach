@@ -14,7 +14,7 @@ description: A Salsa Coach application, plan your favorite moves and rate your o
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 flutter_icons:
     android: "launcher_icon"
@@ -27,29 +27,29 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.5
 
-  flutter_clean_architecture: ^5.0.0
-  flutter_launcher_icons:  ^0.9.0
-  shared_preferences: ^0.4.2
-  charts_flutter: ^0.9.0
-  url_launcher: ^5.4.5
-  intl: ^0.16.1
+  flutter_clean_architecture: ^5.0.4
+  flutter_launcher_icons:  ^0.13.1
+  shared_preferences: ^2.2.0
+  charts_flutter: ^0.12.0
+  url_launcher: ^6.1.12
+  intl: ^0.17.0
 
-  lottie: ^1.0.1
+  lottie: ^2.6.0
 
-  google_fonts: ^2.1.0
+  google_fonts: ^5.1.0
 
-  html: ^0.14.0+3
-  http: ^0.13.0
+  html: ^0.15.4
+  http: ^1.1.0
 
-  flutter_webview_plugin: 0.3.0+2
-  webview_flutter: 0.2.0
+  flutter_webview_plugin: 0.4.0
+  webview_flutter: 4.2.2
 
-  oktoast: ^2.3.2
+  oktoast: ^3.3.1
 
 dev_dependencies:
-  mockito: ^4.1.1
+  mockito: ^5.4.2
   flutter_test:
     sdk: flutter
 

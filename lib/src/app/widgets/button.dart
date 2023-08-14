@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 class HomePageButton extends StatelessWidget {
   final String text;
-  HomePageButton({@required this.text});
+  HomePageButton({required this.text});
 
   @override
   Widget build(BuildContext context) {

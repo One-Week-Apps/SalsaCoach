@@ -2,7 +2,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_usecase.dart';
 
 class AchievementsPresenter extends Presenter {
-  Function getAllAchievementsOnNext;
+  late Function getAllAchievementsOnNext;
 
   final AchievementsUseCase getAchievementsUseCase;
 
@@ -37,8 +37,7 @@ class _GetAllAchievementsUseCaseObserver
 
   @override
   void onNext(response) {
-    print("onNext" + response.achievements.toString());
-    assert(presenter.getAllAchievementsOnNext != null);
+    print("onNext" + response!.achievements.toString());
     presenter.getAllAchievementsOnNext(response.achievements);
   }
 }

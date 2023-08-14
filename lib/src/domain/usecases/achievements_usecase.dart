@@ -23,16 +23,16 @@ class AchievementsUseCaseResponse {
 class AchievementsUseCase
     extends UseCase<AchievementsUseCaseResponse, AchievementsUseCaseParams> {
   AchievementsRepository achievementsWorker = DataAchievementsRepository.shared;
-  List<Achievement> fetchedAchievements;
+  List<Achievement> fetchedAchievements = [];
 
   @override
   Future<Stream<AchievementsUseCaseResponse>> buildUseCaseStream(
-      AchievementsUseCaseParams params) async {
+      AchievementsUseCaseParams? params) async {
     final StreamController<AchievementsUseCaseResponse> controller =
         StreamController();
         
     try {
-      switch (params.type) {
+      switch (params!.type) {
         case AchievementsRequestType.doFetch:
           break;
         case AchievementsRequestType.doStep:

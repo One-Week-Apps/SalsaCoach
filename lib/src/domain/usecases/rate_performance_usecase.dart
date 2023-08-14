@@ -11,11 +11,11 @@ class RatePerformanceUseCase extends UseCase<RatePerformanceUseCaseResponse,
 
   @override
   Future<Stream<RatePerformanceUseCaseResponse>> buildUseCaseStream(
-      RatePerformanceUseCaseParams params) async {
+      RatePerformanceUseCaseParams? params) async {
     final StreamController<RatePerformanceUseCaseResponse> controller =
         StreamController();
     try {
-      bool status = await perfsRepository.add(params.perf);
+      bool status = await perfsRepository.add(params!.perf);
       controller.add(RatePerformanceUseCaseResponse(status));
       controller.close();
     } catch (e) {

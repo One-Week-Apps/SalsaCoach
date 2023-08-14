@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'dart:math';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as fcl;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salsa_coach/src/app/CustomImages.dart';
 import 'package:salsa_coach/src/app/pages/moves_details/moves_details_view.dart';
@@ -14,24 +12,27 @@ import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 import '../achievements/achievements_view.dart';
 import 'moves_listing_controller.dart';
 
-class MovesListingRoute extends View {
+class MovesListingRoute extends fcl.View {
   static const routeName = '/movesListing';
   final AchievementsObserver achievementsObserver;
-  MovesListingRoute(this.achievementsObserver, {Key key, this.title}) : super(key: key);
-
-  final String title;
+  MovesListingRoute(this.achievementsObserver, {Key? key}) : super(key: key);
 
   @override
-  _MovesListingRouteState createState() => _MovesListingRouteState();
+  _MovesListingRouteState createState() {
+    final controller = MovesListingController(DataMovesRepository());
+    return _MovesListingRouteState(controller);
+  }
 }
 
-class _MovesListingRouteState extends ViewState<MovesListingRoute, MovesListingController>
+class _MovesListingRouteState extends fcl.ViewState<MovesListingRoute, MovesListingController>
     with SingleTickerProviderStateMixin {
-    _MovesListingRouteState()
-      : super(MovesListingController(DataMovesRepository()));
+
+    MovesListingController controller;
+
+    _MovesListingRouteState(MovesListingController controller)
+      : this.controller = controller, super(controller);
 
   Widget _refreshMovesButton() {
-    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     return FloatingActionButton(
       heroTag: "refreshMovesButton",
       backgroundColor: Colors.black,
@@ -45,7 +46,6 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, MovesListingC
   }
 
   Widget _moveTableViewCell(int index, Move item) {
-    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     var move = controller.moves[index];
     print("move[${index.toString()}] = $move");
     var thumbnailWidth = MediaQuery.of(context).size.width - 100;
@@ -100,7 +100,6 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, MovesListingC
   }
 
   Widget _ratePerformanceButton() {
-    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
     return FloatingActionButton(
       heroTag: "ratePerformanceButton",
       backgroundColor: Colors.black,
@@ -117,7 +116,6 @@ class _MovesListingRouteState extends ViewState<MovesListingRoute, MovesListingC
   Widget get view => buildPage();
 
   Widget buildPage() {
-    var controller = FlutterCleanArchitecture.getController<MovesListingController>(context);
 
     if (_doOnce) {
       _doOnce = false;

@@ -3,7 +3,7 @@ import '../../domain/entities/move.dart';
 import '../../domain/repositories/moves_repository.dart';
 
 class DataMovesRepository extends MovesRepository {
-  List<Move> moves;
+  List<Move> moves = [];
   static DataMovesRepository _instance = DataMovesRepository._internal();
   DataMovesRepository._internal() {
     moves = <Move>[];

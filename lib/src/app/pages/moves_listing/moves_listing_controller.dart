@@ -15,9 +15,9 @@ import 'moves_listing_presenter.dart';
 import 'package:salsa_coach/main.dart';
 
 class MovesListingController extends Controller {
-  int _counter;
-  List<Move> _moves;
-  List<Performance> _performances;
+  int _counter = 0;
+  List<Move> _moves = [];
+  List<Performance> _performances = [];
   
   // data used by the View
   int get counter => _counter;
@@ -96,13 +96,13 @@ class MovesListingController extends Controller {
   void ratePerformanceValidated() {
     print("ratePerformanceValidated");
     var perfScore = PerformanceScore(
-      _ratings[ScoreTypes.tempo],
-      _ratings[ScoreTypes.bodyMovement],
-      _ratings[ScoreTypes.tracing],
-      _ratings[ScoreTypes.hairBrushes],
-      _ratings[ScoreTypes.blocks],
-      _ratings[ScoreTypes.locks],
-      _ratings[ScoreTypes.handToss],
+      _ratings[ScoreTypes.tempo]!,
+      _ratings[ScoreTypes.bodyMovement]!,
+      _ratings[ScoreTypes.tracing]!,
+      _ratings[ScoreTypes.hairBrushes]!,
+      _ratings[ScoreTypes.blocks]!,
+      _ratings[ScoreTypes.locks]!,
+      _ratings[ScoreTypes.handToss]!,
     );
     var datetime = DateTime.now();
     var perf = Performance(datetime.millisecondsSinceEpoch, perfScore, datetime);
@@ -132,7 +132,7 @@ class MovesListingController extends Controller {
         width: 40,
         height: 40,
         child: IconButton(icon: new Image.asset(
-            i < this._ratings[scoreType] ? CustomImages.starOn : CustomImages.starOff,
+            i < this._ratings[scoreType]! ? CustomImages.starOn : CustomImages.starOff,
             fit: BoxFit.scaleDown,
           ), onPressed: () {
             print("${scoreType.rawValue} rated ${i + 1}");
@@ -200,8 +200,10 @@ class MovesListingController extends Controller {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                RaisedButton(
-                  color: Colors.blue,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue
+                  ),
                   onPressed: () {
                     this.updateAchievements();
                     this.ratePerformanceValidated();
@@ -215,8 +217,10 @@ class MovesListingController extends Controller {
                 SizedBox(
                   width: 20,
                 ),
-                RaisedButton(
-                  color: Colors.red,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

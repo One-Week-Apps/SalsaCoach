@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:salsa_coach/src/app/CustomImages.dart';
@@ -111,7 +109,7 @@ class OnboardingRoute extends StatelessWidget {
                 Spacer(flex: 1),
                 Text('Well done, you have \ncompleted this tutorial!', textAlign: TextAlign.center, style: style,),
                 Spacer(flex: 1),
-                RaisedButton(
+                ElevatedButton(
                   child: Text('Lets go!'),
                   onPressed: () async {
                     var _sharedPref = SharedPref();

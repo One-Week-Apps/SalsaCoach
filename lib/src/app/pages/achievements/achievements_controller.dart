@@ -8,7 +8,7 @@ import 'package:salsa_coach/src/domain/usecases/achievements_usecase.dart';
 import 'package:oktoast/oktoast.dart';
 
 class AchievementsController extends Controller with AchievementsObserver {
-  List<Achievement> _achievements;
+  List<Achievement> _achievements = [];
 
   // data used by the View
   List<Achievement> get achievements => _achievements;
@@ -37,8 +37,8 @@ class AchievementsController extends Controller with AchievementsObserver {
     print("update for " + type.toString());
 
     //ensure all achievements have been fetched
-    if (presenter.getAchievementsUseCase.fetchedAchievements == null) {
-      executeAchievements(AchievementsRequestType.doFetch, null);
+    if (presenter.getAchievementsUseCase.fetchedAchievements == []) {
+      executeAchievements(AchievementsRequestType.doFetch, "");
     }
 
     //foreach objective in fetched list, we increment the progress and trigger the Step use case if needed

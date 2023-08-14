@@ -16,7 +16,7 @@ import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
 class CommonDeps {
   static final CommonDeps _singleton = CommonDeps._internal();
 
-  AchievementsObserver achievementsObserver;
+  late AchievementsObserver achievementsObserver;
 
   factory CommonDeps() {
     return _singleton;
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
         routes: {
           MovesListingRoute.routeName: (context) => MovesListingRoute(achievementsObserver),
           MovesDetailsRoute.routeName: (context) { 
-            final Move move = ModalRoute.of(context).settings.arguments; 
+            final Move move = ModalRoute.of(context)!.settings.arguments as Move; 
             return MovesDetailsRoute(achievementsObserver, move); 
           },
           StatsRoute.routeName: (context) {

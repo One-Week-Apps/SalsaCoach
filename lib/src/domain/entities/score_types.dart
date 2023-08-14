@@ -19,5 +19,5 @@ extension ScoreTypesExtension on ScoreTypes {
     ScoreTypes.handToss: 'Hand Toss',
   };
 
-  String get rawValue => _names[this];
+  String get rawValue => _names[this] ?? "Generic";
 }

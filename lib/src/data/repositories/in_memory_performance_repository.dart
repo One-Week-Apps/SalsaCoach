@@ -9,6 +9,7 @@ class SharedPref {
   read(String key) async {
     final prefs = await SharedPreferences.getInstance();
     var value = prefs.getString(key);
+    if (value == null) return null;
     var decoded = json.decode(value);
     return decoded;
   }

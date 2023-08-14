@@ -11,10 +11,10 @@ enum StatsType {
 }
 
 class SimpleBarChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
+  final List<charts.Series<dynamic, String>> seriesList;
   final bool animate;
 
-  SimpleBarChart(this.seriesList, {this.animate});
+  SimpleBarChart(this.seriesList, {this.animate = false});
 
   /// Creates a [BarChart] with sample data and no transition.
   factory SimpleBarChart.withSampleData() {

@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salsa_coach/src/app/CustomImages.dart';
 import 'package:salsa_coach/src/data/repositories/data_liked_moves_gateway.dart';
 import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:salsa_coach/src/domain/usecases/achievements_observer.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MovesDetailsRoute extends StatefulWidget {
   static const routeName = '/movesDetails';
@@ -101,7 +99,7 @@ class MovesDetailsState extends State<MovesDetailsRoute> {
                 Image.network(move.thumbnailUrlString),
                 Image.asset(CustomImages.play),
               ]),
-              onTap: () { launch(move.urlString); this.widget.achievementsObserver.update(AchievementTypes.videoLearner); }
+              onTap: () { launchUrlString(move.urlString); this.widget.achievementsObserver.update(AchievementTypes.videoLearner); }
             ),
       ),
             ),

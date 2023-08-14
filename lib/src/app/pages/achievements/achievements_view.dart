@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as fcl;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salsa_coach/src/app/CustomImages.dart';
 import 'package:salsa_coach/src/app/pages/achievements/achievements_controller.dart';
@@ -12,19 +10,21 @@ import 'package:oktoast/oktoast.dart';
 
 import '../stats/stats_view.dart';
 
-class AchievementsRoute extends View {
-  AchievementsRoute({Key key, this.title}) : super(key: key);
-
-  final String title;
+class AchievementsRoute extends fcl.View {
+  AchievementsRoute({Key? key}) : super(key: key);
 
   @override
-  _AchievementsRouteState createState() => _AchievementsRouteState();
+  _AchievementsRouteState createState() {
+    final controller = AchievementsController();
+    return _AchievementsRouteState(controller);
+  }
 }
 
 class _AchievementsRouteState
-    extends ViewState<AchievementsRoute, AchievementsController>
+    extends fcl.ViewState<AchievementsRoute, AchievementsController>
     with SingleTickerProviderStateMixin {
-  _AchievementsRouteState() : super(AchievementsController());
+  AchievementsController controller;
+  _AchievementsRouteState(AchievementsController controller) : this.controller = controller, super(controller);
 
   Widget _cell(int index, Achievement achievement) {
     var stack = GestureDetector(
@@ -55,7 +55,7 @@ class _AchievementsRouteState
       ],
     ));
 
-    int points = 250 + 250 * (int.tryParse(achievement.uid) % 10);
+    int points = 250 + 250 * (int.tryParse(achievement.uid)! % 10);
 
     return Tooltip(
           message: achievement.description,
@@ -87,16 +87,17 @@ class _AchievementsRouteState
                 height: 6.0,
                 color: Colors.transparent,
               ),
-              RaisedButton(
-                shape:
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape:
                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                color: Colors.orange,
-                disabledColor: Colors.transparent,
+                  backgroundColor: Colors.orange,
+                  disabledBackgroundColor: Colors.transparent,
+                ),
                 onPressed: (achievement.currentStep != achievement.numberOfStep ||
                         achievement.isRewardClaimed)
                     ? null
                     : () {
-                        var controller = FlutterCleanArchitecture.getController<AchievementsController>(context);
                         controller.executeAchievements(
                             AchievementsRequestType.doClaim, achievement.uid);
                         showToastWidget(Image.asset(CustomImages.achievementTrophy));
@@ -115,7 +116,7 @@ class _AchievementsRouteState
 
     showInfoDialog(String title, String text) {
       // set up the buttons
-      Widget closeButton = FlatButton(
+      Widget closeButton = TextButton(
         child: Text("Got it!"),
         onPressed:  () {
           Navigator.pop(context);
@@ -140,13 +141,13 @@ class _AchievementsRouteState
 
     showAlertDialog(BuildContext context, String title, String text, VoidCallback onConfirm) {
       // set up the buttons
-      Widget cancelButton = FlatButton(
+      Widget cancelButton = TextButton(
         child: Text("Cancel"),
         onPressed:  () {
           Navigator.pop(context);
         },
       );
-      Widget continueButton = FlatButton(
+      Widget continueButton = TextButton(
         child: Text("Confirm"),
         onPressed: () {
           Navigator.pop(context);
@@ -175,12 +176,9 @@ class _AchievementsRouteState
   Widget get view => buildPage();
 
   Widget buildPage() {
-    AchievementsController controller =
-        FlutterCleanArchitecture.getController<AchievementsController>(context);
-
     if (doOnce) {
       doOnce = false;
-      controller.executeAchievements(AchievementsRequestType.doFetch, null);
+      controller.executeAchievements(AchievementsRequestType.doFetch, "");
     }
 
     return Scaffold(
@@ -219,14 +217,16 @@ class _AchievementsRouteState
           SizedBox(
             height: 10,
           ),
-          RaisedButton(
-                shape:
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                  shape:
                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                color: Colors.black,
+                  backgroundColor: Colors.black,
+                ),
                 onPressed: () {
                   showAlertDialog(context, "Reset progress", "This will reset all your progress. \nAre you sure you want to continue?", (){
                     controller.executeAchievements(
-                      AchievementsRequestType.doReset, null);
+                      AchievementsRequestType.doReset, "");
                   });
                 },
                 child: Text(
