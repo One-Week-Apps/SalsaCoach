@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/app/custom_images.dart';
 import 'package:salsa_coach/src/data/repositories/data_liked_moves_gateway.dart';
 import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:salsa_coach/src/domain/entities/move.dart';

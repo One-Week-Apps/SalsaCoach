@@ -1,4 +1,4 @@
-import 'package:salsa_coach/src/app/SharedPreferencesKeys.dart';
+import 'package:salsa_coach/src/app/shared_preferences_keys.dart';
 import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

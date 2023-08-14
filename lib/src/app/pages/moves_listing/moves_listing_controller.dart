@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/app/custom_images.dart';
 import 'package:salsa_coach/src/domain/entities/achievement_types.dart';
 import 'package:salsa_coach/src/domain/entities/move.dart';
 import 'package:salsa_coach/src/domain/entities/performance.dart';

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as fcl;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/app/custom_images.dart';
 import 'package:salsa_coach/src/app/pages/moves_details/moves_details_view.dart';
 import 'package:salsa_coach/src/data/repositories/data_moves_repository.dart';
 import 'package:salsa_coach/src/domain/entities/achievement_types.dart';

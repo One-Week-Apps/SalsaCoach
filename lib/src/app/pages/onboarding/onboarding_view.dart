@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:salsa_coach/src/app/CustomImages.dart';
+import 'package:salsa_coach/src/app/custom_images.dart';
 import 'package:salsa_coach/src/data/repositories/in_memory_performance_repository.dart';
-import '../../SharedPreferencesKeys.dart';
+import '../../shared_preferences_keys.dart';
 import '../moves_listing/moves_listing_view.dart';
 
 class OnboardingRoute extends StatelessWidget {

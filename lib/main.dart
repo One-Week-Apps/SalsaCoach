@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:salsa_coach/src/app/SharedPreferencesKeys.dart';
+import 'package:salsa_coach/src/app/shared_preferences_keys.dart';
 import 'package:salsa_coach/src/app/pages/achievements/achievements_controller.dart';
 import 'package:salsa_coach/src/app/pages/moves_details/moves_details_view.dart';
 import 'package:salsa_coach/src/app/pages/moves_listing/moves_listing_view.dart';
